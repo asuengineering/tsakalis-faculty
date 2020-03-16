@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Konstantinos Tsakalis">
+  <meta name="GENERATOR"
+ content="Mozilla/4.76 [en] (Win98; U) [Netscape]">
+  <title>hydra</title>
+</head>
+<body alink="#ff0000" bgcolor="#ffffff" link="#00cc00" text="#000099"
+ vlink="#551a8b">
+<b><font color="#006600"><font size="+1">The Hydrapod Senior Design
+Project: An exercise in bipedal walking.</font></font></b>
+<br>
+<hr size="4" width="100%">
+<br>
+<font color="#ff6600">The students:&nbsp; Abhinand Lath, Baber Khan,
+Mohsin Drees (Fall '96)</font>
+<br>
+<hr size="4" width="100%">
+<br>
+<i><font color="#990000">INTRO</font></i>
+<p>The construction of a simple walking biped presents an interesting
+problem
+in controls, as well as
+<br>
+in engineering design.&nbsp; From the engineering design point of view,
+the bipedal motion should be
+<br>
+simple enough for the project to be feasible within an academic
+semester.
+Still, it should be more
+<br>
+challenging than that of a toy robot.
+</p>
+<p>Beginning with such a loose objective ("let's make something that
+walks
+on two legs"), one quickly
+<br>
+gains appreciation of the connections between feedback control theory
+and the natural, instinctive,
+<br>
+action of walking. In particular, the classical inverted pendulum
+system
+appears as a core component
+<br>
+in bipedal walking. Imitating the human bipedal walk, however, is
+fairly
+complicated; it requires
+<br>
+ankle, knee and, possibly, waist joints, 2-dimensional stabilization.
+<br>
+(Here, one also learns a new respect for back problems).
+<br>
+</p>
+<hr size="4" width="100%"><br>
+<i><font color="#990000">THE HYDRAPOD CONCEPT</font></i>
+<p>The Hydrapod performs its awkward bipedal motion on a straight line
+and uses only 1-DOF
+<br>
+ankle and waist joints.&nbsp; Each joint motion is controlled by a
+servomotor.&nbsp; Two more servomotors
+<br>
+are used to move balancing weights on each leg. The walking motion
+is a sequence of three basic
+<br>
+phases (vertical stabilization, step, exchange of planted foot; see
+the following schematic for details).
+</p>
+<p><img src="hydra1.gif" height="532" width="599"><br>
+</p>
+<hr size="6" width="100%"><br>
+<i><font color="#990000">ON NUMERICAL SIMULATION</font></i>
+<p>A study of the hydrapod's motion was conducted by implementing a
+simplified
+nonlinear model in
+<br>
+SIMULINK.&nbsp; The simulation of the motion provided insight on the
+stability/performance
+<br>
+requirements of the controllers, the effect of the various
+nonlinearities
+on the feedback loops,
+<br>
+the servomotor power requirements and the achievable angular
+velocities.
+<br>
+(The following picture shows the outer layer of the simulator.)
+</p>
+<p><img src="hydra2.gif" height="389" width="509"><br>
+</p>
+<hr size="7" width="100%"><br>
+<i><font color="#990000">MAKING MOVIES</font></i>
+<p>Two video clips are provided in the links below, showing the
+execution
+of one step. The reference
+<br>
+angle commands to execute the step are issued manually, leaving plenty
+of room for improvement,
+<br>
+automation via computer control etc. Autonomy of motion is also left
+to the future. In fact the
+<br>
+Hydrapod uses banks of AA batteries as balancing weights, in
+anticipation
+of meeting the power
+<br>
+needs of autonomous motion.&nbsp; Finally, as a first video production,
+it suffers from the usual lack of
+<br>
+sufficient lighting, background, and all the not-so-special
+effects.&nbsp;
+Still, George Lucas beware!
+</p>
+<ul>
+  <li>
+Hydra Step 1 (1.56M, AVI)</li>
+  <li>
+Hydra Step 2 (1.75M, AVI)</li>
+</ul>
+(The clip links have been removed due to lack of space and poor quality
+by todays standards)<br>
+<hr size="11" width="100%">
+<br>
+<hr size="11" width="100%">
+</body>
+</html>

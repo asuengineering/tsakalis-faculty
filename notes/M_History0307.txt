@@ -1,0 +1,31 @@
+%-- MATLAB HISTORY 3/7/07  9:08 AM --%
+P=tf(1,[1 0])
+C0=tf(1,[.01 1 0])
+bode(P*C0)
+186-130
+bode(P*tf(1,[1 0]))
+tz=tan(50*pi/180)/10
+C=tf([.1192 1],[ 1 0])
+CPI=tf([.1192 1],[ 1 0])
+bode(P*CPI)
+K=1/bode(P*CPI,10)
+CPI=tf([.1192 1],[ 1 0])*K
+bode(P*CPI)
+[m,p]=bode(P*CPI,10)
+uc=tf([-1 1],[1 1])
+nyquist(P*CPI,uc)
+step(feedback(P*CPI,1))
+bode(feedback(P*CPI,1))
+tz=tan(56/2*pi/180)/10
+CPID=tf(conv([0.053 1],[.053 1]),[.01 1 0])
+bode(P*CPID)
+K=1/bode(P*CPID,10)
+CPID=tf(conv([0.053 1],[.053 1]),[.01 1 0])*K
+bode(P*CPID)
+grid
+step(feedback(P*CPI,1),feedback(P*CPID,1))
+bode(feedback(P*CPI,1),feedback(P*CPID,1))
+CPI
+DPI=tf([8.30 -7.66],[1 -1],.01)
+step(feedback(P*CPI,1),feedback(c2d(P,0.01)*DPI,1),feedback(c2d(P,0.01)*c2d(CPIP,0.01),1))
+bode(feedback(P*CPI,1),feedback(c2d(P,0.01)*DPI,1),feedback(c2d(P,0.01)*c2d(CPIP,0.01),1))

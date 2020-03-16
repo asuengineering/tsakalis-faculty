@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-7">
+  <meta name="Generator" content="Microsoft Word 97">
+  <meta name="Template" content="C:\MSOFFICE\OFFICE\html.dot">
+  <meta name="GENERATOR" content="Mozilla/4.76 [en] (Win98; U) [Netscape]"><title>EEE_304</title></head>
+<body style="background-color: rgb(255, 255, 102);" alink="#ff0000" bgcolor="#ffcc33" link="#0000ff" text="#000000" vlink="#800080">
+<center><b><font size="+1">EEE 304 Signals and Systems II</font></b><font size="+1"><br>
+</font><span style="font-weight: bold;">Fall 2010, MWF 12:55-13:45, SCOB250</span></center>
+<center></center>
+<p><b><font size="-1">Instructor:</font> Kostas Tsakalis, <font color="#ff0000">GWC 358,</font> 965-1467,</b><font size="-1"> <img src="email.GIF" alt="tsakalis" height="22" width="122"> </font><br>
+<font size="-1"><b>Office Hours:</b> <span style="color: rgb(204, 0, 0);">MWF 14:00-15:00 or by appointment</span></font><br>
+<font size="-1"><b>Textbook:</b> Oppenheim and
+Willsky <i>Signals and Systems, 2nd Ed., </i>Prentice Hall,
+1997.<br>
+</font></p>
+<p><font size="-1"><span style="font-weight: bold;">LAB TIMES:</span>
+(TA present at <span style="font-weight: bold;">GWC 379)</span><br>
+<span style="font-weight: bold;"></span></font>M: 8-11&nbsp;
+T: 8-11&nbsp; W: 11-14&nbsp; S: 12-15
+<br>
+Starts: M 1/25.&nbsp; For labs on a holiday, please make arrangements
+with the TA.<br>
+</p>
+<font size="-1"></font>
+<b><font size="-1">Course Outline:</font></b>
+<ol>
+  <li>Review of fundamental concepts and problems in systems
+theory&nbsp; (Ch.2)<br>
+  </li>
+  <li>Laplace and Fourier Transform review (Ch.9,4)<br>
+  </li>
+  <li>z-transform and DTFT review (Ch.10,5)<br>
+  </li>
+  <li>Sampling and reconstruction (Ch.7)<br>
+  </li>
+  <li>State-space description of CT/DT systems&nbsp; (Notes-optional) <br>
+  </li>
+  <li>Analog and Digital Filters: Structure and design (Ch.3.8, 6)<br>
+  </li>
+  <li>Feedback systems: stability and synthesis principles (Ch. 11)<br>
+  </li>
+  <li>Analog and Digital Modulation (Ch. 8)<br>
+  </li>
+</ol>
+<font size="-1"><b>Grading:</b> HW 10%, LAB 20%, Tests/Quizzes 40% (
+best
+n-1&nbsp;
+scores),
+Final 30%</font><br>
+<font size="-1">Absolute Grading Scale: A &gt; 90 &gt;&nbsp; B &gt; 75
+&gt; C &gt; 60 &gt; D &gt; 50 &gt; E</font><br>
+<font size="-1"> (Cut-off points may only decrease depending on the
+final
+grade distribution.)<br>
+<a href="tests/304gradedistribution.pdf"><big><span style="font-weight: bold;">Current
+grade distribution</span></big></a> (updated after each test) <br>
+</font><br>
+<font size="-1"> </font><font size="-1"><b>ALL TESTS ARE
+CLOSED-BOOKS/NOTES.&nbsp; THE <a href="notes/fourier.pdf"> LINKED
+TABLES OF FOURIER PROPERTIES</a> ARE ALLOWED (Print your own copy).</b></font><br>
+<b><font size="-1">Important Dates:</font></b><br>
+<font size="-1">HW: see below <br>
+Tests: see below&nbsp; (typically first 30min of class,
+1-2 problems)<br>
+</font><font size="+1"><b style="font-weight: bold; font-style: italic; color: rgb(204, 0, 0);">Final
+Exam</b><span style="font-weight: bold; font-style: italic; color: rgb(204, 0, 0);">,&nbsp; F 12/10 9:50-11:40</span><span style="font-family: arial,helvetica,sans-serif; font-weight: bold; font-style: italic; color: rgb(204, 0, 0);"></span></font><b style="font-weight: bold; font-style: italic; color: rgb(204, 0, 0);"><br>
+</b><font size="-1"><b>-------------------------------------------------------------------------------------<br>
+</b></font><big><b><font color="#330000"><font size="+1"><big>HW
+Assignments,
+Test Material, Handouts</big></font></font></b><br>
+</big><br>
+<font size="+1">Background material (from 203)l: <a href="notes/e303.pdf">Class Notes
+#1</a>
+(.pdf) <br>
+&nbsp;&nbsp; Basic definitions and examples on system properties. <br>
+&nbsp;&nbsp; Linearity, Time Invariance, Causality, Memory, Stability. </font><font size="+1"><font color="#009900"><br>
+<a href="coursea/303ProblemsOppenheim.pdf">Solved Problems: Recent
+Selections</a> <br>
+</font><a href="coursea/303hwII.pdf">Other solved problems</a><br>
+</font><span style="text-decoration: underline;"><a href="coursea/304SampleTests.pdf"><br>
+Old 304 Tests (sample)</a><br>
+</span><a href="coursea/304MoreSamples.pdf"><span style="font-weight: bold; color: rgb(204, 0, 0);">More
+Samples</span></a><br>
+<big style="font-weight: bold;"><br>
+</big><big style="font-weight: bold; color: rgb(0, 153, 0);">Presentations
+on feedback control systems</big><span style="color: rgb(0, 153, 0);"> </span><br>
+<a href="notes/CN1.pdf">1. Motivation and simple calculations.
+Performance and Robustness notions<br>
+</a><a href="notes/CNF.pdf">2. Some special problems in controller
+design. Saturating actuators and sequential loop closing.<br>
+</a><br>
+<br>
+<big style="font-weight: bold;"><a href="http://www.eas.asu.edu/%7Emidle/jdsp/">!!! Convolution
+Demos: Try out this JAVA-based program
+(http://www.eas.asu.edu/~midle/jdsp/) </a><br>
+</big><br>
+Sampling and reconstruction Demo: Download the files: <a href="notes/Exp_Sampling.pdf">
+Problem description</a> , <a href="notes/exp303.m">Matlab file</a> , <a href="notes/Tada.wav">Tada sound</a> . <br>
+Study the problem described in the linked notes. Use the Matlab program
+to experiment with <br>
+different parameter values (frequency, filters, etc) <br>
+<span style="color: rgb(153, 0, 0); font-weight: bold;"></span><br>
+<br style="font-weight: bold; color: rgb(153, 51, 153);">
+<font color="#000000"><big><span style="font-weight: bold; color: rgb(153, 51, 153); text-decoration: underline;">ASSIGNMENTS</span></big><br>
+</font><br>
+<b style="color: rgb(255, 0, 0);"><br>
+</b>
+<table style="width: 100%; text-align: left;" border="3" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold; color: rgb(204, 0, 0);">ASSIGNMENT<br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold; color: rgb(204, 0, 0);">DUE
+DATE<br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold; color: rgb(204, 0, 0);">TOPIC<br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">SOLUTIONS</span><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">HW
+0: 203 Old hw and tests <br>
+(see soln for statements)</span><br>
+      </td>
+      <td style="vertical-align: top; font-weight: bold;">Fri 9/3<br>
+      </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Background
+Material</span><br>
+      </td>
+      <td style="vertical-align: top;"><a href="coursea/203SampleHWTests2.pdf">Problem statements<br>
+
+and solutions</a><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><b><a href="coursea/304_hw1.pdf">HW
+1</a> <br>
+      </b></td>
+      <td style="vertical-align: top;"><b>Fri 9/10<br>
+</b></td>
+      <td style="vertical-align: top;"><b style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);">Laplace-Z transforms<br>
+      </span></b></td>
+      <td style="vertical-align: top;"><a href="coursea/304_hw1.pdf">SOLUTIONS</a><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><b style="color: rgb(255, 0, 0);">TEST
+1</b></td>
+      <td style="vertical-align: top;"><b style="color: rgb(255, 0, 0);">Fri 9/17<br>
+      </b></td>
+      <td style="vertical-align: top;"><span style="font-weight: bold; color: rgb(204, 0, 0);">Laplace-Z transforms</span></td>
+      <td style="vertical-align: top;"><a href="coursea/304_Test1.pdf"><span style="font-weight: bold;"></span></a><a href="tests/304_Test1F10.pdf">SOLUTIONS</a><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; color: rgb(51, 204, 0);"><b>LAB
+1</b><b>&nbsp;&nbsp; CleanSpeachFile (see BB)<br>
+      </b></td>
+      <td style="vertical-align: top; color: rgb(51, 204, 0);"><b><br>
+      </b></td>
+      <td style="vertical-align: top; color: rgb(51, 204, 0);"><span style="font-weight: bold;">Filtering</span> </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><b><a href="coursea/304_hw2.pdf">HW
+2</a><br>
+      </b></td>
+      <td style="vertical-align: top;"><b style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);">Fri 9/24<br>
+      </span></b></td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;"></span><span style="font-weight: bold;">Filtering</span> </td>
+      <td style="vertical-align: top;"><span style="font-weight: bold;"><a href="coursea/304_hw2.pdf">SOLUTIONS</a><br>
+      </span></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><b style="color: rgb(255, 0, 0);">TEST
+2<br>
+      </b></td>
+      <td style="vertical-align: top;"><b style="color: rgb(255, 0, 0);">Fri&nbsp; 10/1<br>
+      </b></td>
+      <td style="vertical-align: top;"><b style="color: rgb(255, 0, 0);">Filtering</b></td>
+      <td style="vertical-align: top;"><a href="tests/304_Test2F10.pdf">SOLUTIONS</a><br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 153, 0);">LAB
+2&nbsp; Sample VI file </span></span><b>(see BB)</b></td>
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 153, 0);"><br>
+      </span></span></td>
+      <td style="vertical-align: top;"><span style="color: rgb(0, 153, 0);">Filter Design</span><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);"><a href="coursea/304_hw3.pdf">HW 3</a><br>
+      </span></span></td>
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);">Fri 10/15</span></span><br>
+      </td>
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);">Sampling
+and Reconstruction<br>
+      </span></span></td>
+      <td style="vertical-align: top;">SOLUTIONS<br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);">TEST
+3</span></td>
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);">Fri 10/22<br>
+      </span></td>
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);">Sampling and Reconstruction<br>
+      </span></td>
+      <td style="vertical-align: top;">SOLUTIONS<br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top; color: rgb(51, 204, 0);">LAB 3&nbsp;
+vi's: fft&nbsp; sound&nbsp; sine&nbsp; square <b>(see BB)</b>
+      </td>
+      <td style="vertical-align: top; color: rgb(51, 204, 0);"><br>
+      </td>
+      <td style="vertical-align: top; color: rgb(51, 204, 0);">Sampling
+and Reconstruction<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><a href="coursea/304_hw4.pdf">HW
+4</a><span style="color: rgb(0, 153, 0);"></span><br>
+      </td>
+      <td style="vertical-align: top; color: rgb(0, 0, 0);">Fri 10/29<br>
+      </td>
+      <td style="vertical-align: top;"><span style="color: rgb(0, 0, 0);">Modulation</span><br>
+      </td>
+      <td style="vertical-align: top;">SOLUTIONS<br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);">TEST
+4</span></td>
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);">Fri 11/5<br>
+      </span></td>
+      <td style="vertical-align: top; color: rgb(204, 0, 0);">Modulation</td>
+      <td style="vertical-align: top;">SOLUTIONS<br>
+      </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);"></span></span><span style="color: rgb(0, 153, 0);"></span><span style="color: rgb(204, 51, 204);">ABET
+TEST </span><br style="color: rgb(204, 51, 204);">
+      <span style="color: rgb(204, 51, 204);">Multiple choice,</span><br style="color: rgb(204, 51, 204);">
+      <span style="color: rgb(204, 51, 204);">replaces worst grade</span></td>
+      <td style="vertical-align: top;"><span style="color: rgb(204, 51, 204);">Fri 11/12<br>
+<br>
+</span>
+      </td>
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);"></span></span><span style="color: rgb(51, 204, 0);"></span><span style="color: rgb(204, 51, 204);">Basic
+concepts: convolution, stability, </span><br style="color: rgb(204, 51, 204);">
+      <span style="color: rgb(204, 51, 204);">frequency responses,
+sampling. </span><br style="color: rgb(204, 51, 204);">
+      <span style="color: rgb(204, 51, 204);">Continuous/Discrete time systems</span>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><a href="coursea/304_HW5.pdf"><span style="font-weight: bold;"></span></a><span style="color: rgb(0, 153, 0);">LAB
+4 </span> <span style="color: rgb(51, 204, 0);">vi's:</span><span style="color: rgb(0, 153, 0);"><span style="color: rgb(51, 204, 0);"> </span><span style="color: rgb(51, 204, 0);">modulation</span><span style="color: rgb(51, 204, 0);">, </span><span style="color: rgb(51, 204, 0);">y.wav </span></span><b>(see BB)</b> </td>
+      <td style="vertical-align: top; font-weight: bold;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);"><span style="color: rgb(51, 204, 0);"><br>
+</span></span></span></td>
+      <td style="vertical-align: top; font-weight: bold;"><span style="color: rgb(51, 204, 0);">Modulation</span></td>
+      <td style="vertical-align: top;"><a href="coursea/304_HW6sol.pdf"><span style="font-weight: bold;"></span></a><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; color: rgb(204, 51, 204); font-weight: bold;"><a href="coursea/304_hw5.pdf"><span style="font-weight: bold;">HW
+5</span></a> <a href="coursea/eee304_11_20_08.m">matlab history
+(lecture)</a>&nbsp; </td>
+      <td style="vertical-align: top; color: rgb(204, 51, 204); font-weight: bold;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);">Fri 11/19<br>
+      </span></span></td>
+      <td style="vertical-align: top; color: rgb(204, 51, 204); font-weight: bold;"><span style="color: rgb(255, 0, 0);"><span style="color: rgb(0, 0, 0);">Feedback</span></span>
+      </td>
+      <td style="vertical-align: top;">SOLUTIONS </td>
+    </tr>
+    <tr style="font-weight: bold;">
+      <td style="vertical-align: top;"><span style="color: rgb(255, 0, 0);">TEST
+5<br>
+      <a href="coursea/hist120408.m">Matlab history (lecture)</a><br>
+      </span></td>
+      <td style="vertical-align: top; color: rgb(255, 0, 0);">Fri 12/3<br>
+      </td>
+      <td style="vertical-align: top; color: rgb(255, 0, 0);">Feedback<br>
+      </td>
+      <td style="vertical-align: top; color: rgb(255, 0, 0);">SOLUTIONS<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<b style="color: rgb(255, 0, 0); font-weight: bold;"><span style="color: rgb(0, 153, 0);"></span></b><b style="color: rgb(255, 0, 0);"><br>
+LAB INFO<br>
+</b>TA's Uttam Bhat, Jayaraman Thiagarajan (office <b>GWC 446</b>),
+LAB GWC379 &lt;&gt;<br>
+<br>
+Deadline announcements and Lab Documents are posted above.&nbsp; <br>
+<div>The lab reports must be submitted on the specified
+due
+date. You may submit the lab report to&nbsp;Jayaraman in case you miss
+out
+the class or lab. In case he is not
+present, you may slide the report under the&nbsp;door. <font color="#ff0000">See a TA or the instructor for late reports.</font><br>
+</div>
+<br>
+<div>The Lab report must not exceed 6 pages (unless otherwise
+specified). You are expected to answer only the Lab exercises (and not
+the introduction part) provided at the end of&nbsp;&nbsp;the Lab
+instructions.
+You may include few diagrams or capture the screen shot of the graphs
+that you generated by simulations.&nbsp;<strong>You are not supposed to
+submit the VIs, but only the screenshots of the VIs&nbsp;. <font color="#ff0000">A Sample Lab Report is posted below.</font></strong></div>
+<br>
+<div>You may work in groups, but you must submit your individual report
+with the screenshots of your own VIs. </div>
+<br>
+You can install Lab View in your PC or Mac. Send an email from your <strong><font size="4">'<a href="http://asu.edu/">asu.edu</a>'</font></strong> email
+account to<strong> </strong><a href="mailto:LabView@asu.edu"><strong>LabView@asu.edu</strong></a>.
+Include your <strong><font size="4">10 digit ASU affiliate number</font></strong>.
+You will be guided from there.&lt;&gt;<br>
+<font face="Helvetica" size="3"><br>
+9/14/10 UPDATE: The LabVIEW Student Edition for $20 is now live on the e-academy website.&nbsp;&nbsp;Visit&nbsp;&nbsp;</font><a href="http://estore.onthehub.com/" target="_blank"><font color="blue" face="Helvetica" size="3">http://estore.onthehub.com/</font></a><font face="Helvetica" size="3">and search for 'LabVIEW'.</font> <br>
+
+<br>
+<font color="#ff0000"><strong>
+<br>
+All Documents must be saved onto personal flash drive before Shutting
+down the computer. Data will be lost once you log off.</strong></font>
+<div><br>
+If you have any questions regarding the labs, you may contact the TAs
+during the lab hours or by email.</div>
+<br style="color: rgb(0, 0, 0);">
+<b style="color: rgb(255, 0, 0);">&nbsp;
+</b><b style="color: rgb(0, 153, 0);"><a href="coursea/304SampleLabReport.pdf">SAMPLE LAB REPORT</a> <br>
+</b><br>
+-----------------------------------------------------------<br>
+<font color="#ffcc00"></font><br>
+<font style="font-weight: bold;" color="#cc0000">EEE 304 FINAL EXAM
+Material:</font><br style="font-weight: bold;">
+<font color="#cc0000"> </font><big style="color: rgb(255, 0, 0);">HW
+1-5, Tests 1-5<br>
+</big><br>
+</body></html>

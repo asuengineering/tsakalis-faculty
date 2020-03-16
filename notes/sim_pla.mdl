@@ -1,0 +1,4522 @@
+Model {
+  Name			  "sim_pla"
+  Version		  2.20
+  SimParamPage		  RTWExternal
+  SampleTimeColors	  off
+  InvariantConstants	  off
+  WideVectorLines	  off
+  ShowLineWidths	  off
+  StartTime		  "0.0"
+  StopTime		  "200"
+  Solver		  FixedStepDiscrete
+  RelTol		  "1e-5"
+  AbsTol		  "1e-5"
+  Refine		  "1"
+  MaxStep		  ".1"
+  InitialStep		  "auto"
+  FixedStep		  "auto"
+  MaxOrder		  5
+  OutputOption		  RefineOutputTimes
+  OutputTimes		  "[]"
+  LoadExternalInput	  off
+  ExternalInput		  "[t, u]"
+  SaveTime		  off
+  TimeSaveName		  "tout"
+  SaveState		  off
+  StateSaveName		  "xout"
+  SaveOutput		  off
+  OutputSaveName	  "yout"
+  LoadInitialState	  off
+  InitialState		  "xInitial"
+  SaveFinalState	  off
+  FinalStateName	  "xFinal"
+  LimitMaxRows		  off
+  MaxRows		  "1000"
+  Decimation		  "1"
+  AlgebraicLoopMsg	  warning
+  MinStepSizeMsg	  warning
+  UnconnectedInputMsg	  warning
+  UnconnectedOutputMsg	  warning
+  UnconnectedLineMsg	  warning
+  ConsistencyChecking	  off
+  ZeroCross		  on
+  SimulationMode	  normal
+  RTWSystemTargetFile	  "grt.tlc"
+  RTWInlineParameters	  off
+  RTWPlaceOutputsASAP	  off
+  RTWRetainRTWFile	  off
+  RTWTemplateMakefile	  "grt_default_tmf"
+  RTWMakeCommand	  "make_rtw"
+  RTWGenerateCodeOnly	  off
+  ExtModeMexFile	  "ext_comm"
+  ExtModeBatchMode	  off
+  BlockDefaults {
+    Orientation		    right
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    NamePlacement	    normal
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+    ShowName		    on
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    center
+    VerticalAlignment	    middle
+    ForegroundColor	    black
+    BackgroundColor	    white
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    normal
+    FontAngle		    normal
+  }
+  System {
+    Name		    "sim_pla"
+    Location		    [34, 115, 788, 512]
+    Open		    on
+    ToolBar		    on
+    StatusBar		    on
+    ScreenColor		    white
+    PaperOrientation	    landscape
+    PaperPositionMode	    auto
+    PaperType		    usletter
+    PaperUnits		    inches
+    Block {
+      BlockType		      Clock
+      Name		      "Clock"
+      Position		      [40, 15, 60, 35]
+      BackgroundColor	      yellow
+      Location		      [30, 40, 140, 75]
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Control Switch"
+      Position		      [420, 41, 445, 79]
+      BackgroundColor	      red
+      Value		      "1"
+    }
+    Block {
+      BlockType		      Mux
+      Name		      "Mux2"
+      Ports		      [3, 1, 0, 0, 0]
+      Position		      [195, 84, 225, 116]
+      Inputs		      "3"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "PLANT"
+      Ports		      [1, 2, 0, 0, 0]
+      Position		      [540, 84, 610, 151]
+      BackgroundColor	      green
+      ShowPortLabels	      on
+      MaskInitialization      "load 'plant_da'"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      none
+      MaskIconUnits	      autoscale
+      System {
+	Name			"PLANT"
+	Location		[43, 42, 783, 502]
+	Open			off
+	ToolBar			off
+	StatusBar		off
+	ScreenColor		green
+	PaperOrientation	landscape
+	PaperPositionMode	auto
+	PaperType		usletter
+	PaperUnits		inches
+	Block {
+	  BlockType		  Inport
+	  Name			  "control"
+	  Position		  [35, 27, 70, 73]
+	  ForegroundColor	  yellow
+	  BackgroundColor	  blue
+	  Port			  "1"
+	  PortWidth		  "-1"
+	  SampleTime		  "-1"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Nonlinear\nProfile\nModel"
+	  Ports			  [2, 1, 0, 0, 0]
+	  Position		  [515, 136, 570, 194]
+	  ShowPortLabels	  on
+	  System {
+	    Name		    "Nonlinear\nProfile\nModel"
+	    Location		    [310, 124, 923, 606]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Inport
+	      Name		      "spike1"
+	      Position		      [35, 60, 55, 80]
+	      Port		      "1"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "error"
+	      Position		      [35, 150, 55, 170]
+	      Port		      "2"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Denominator\nBlock"
+	      Ports		      [1, 1, 0, 0, 0]
+	      Position		      [325, 181, 400, 229]
+	      Orientation	      left
+	      ShowPortLabels	      on
+	      System {
+		Name			"Denominator\nBlock"
+		Location		[4, 74, 1014, 454]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		white
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Inport
+		  Name			  "in_1"
+		  Position		  [65, 220, 85, 240]
+		  Port			  "1"
+		  PortWidth		  "-1"
+		  SampleTime		  "-1"
+		}
+		Block {
+		  BlockType		  StateSpace
+		  Name			  "A Matrix"
+		  Position		  [780, 271, 805, 299]
+		  Orientation		  left
+		  A			  "[]"
+		  B			  "[]"
+		  C			  "[]"
+		  D			  "K"
+		  X0			  "0"
+		  MaskType		  "Matrix Gain"
+		  MaskDescription	  "Matrix Gain."
+		  MaskHelp		  "Multiplies input vector by entered "
+"matrix to produce output vector (y=Au)."
+		  MaskPromptString	  "Gain matrix:"
+		  MaskStyleString	  "edit"
+		  MaskTunableValueString  "on"
+		  MaskInitialization	  "K = @1;"
+		  MaskDisplay		  "disp('K')"
+		  MaskIconFrame		  on
+		  MaskIconOpaque	  on
+		  MaskIconRotate	  none
+		  MaskIconUnits		  autoscale
+		  MaskValueString	  "(eye(size(Ftot_p))+TSAMPLEP*Ftot_p)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Average\nBlock"
+		  Position		  [180, 213, 240, 247]
+		  MATLABFcn		  "mean(u)"
+		  OutputWidth		  "1"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Ltot contribution"
+		  Position		  [535, 123, 595, 157]
+		  MATLABFcn		  "Ltot_p*kron(eye(noutp_p),u(noutp_p+"
+"1:noutp_p+length(order_y_p)))*u(1:noutp_p)*TSAMPLEP"
+		  OutputWidth		  "length(Ftot_p)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "M3 contribution"
+		  Position		  [535, 288, 595, 322]
+		  MATLABFcn		  "M3_p*kron(eye(noutp_p),u)*ones(nout"
+"p_p,1)*TSAMPLEP"
+		  OutputWidth		  "length(Ftot_p)"
+		}
+		Block {
+		  BlockType		  StateSpace
+		  Name			  "Matrix\nGain1"
+		  Position		  [860, 161, 885, 189]
+		  A			  "[]"
+		  B			  "[]"
+		  C			  "[]"
+		  D			  "K"
+		  X0			  "0"
+		  MaskType		  "Matrix Gain"
+		  MaskDescription	  "Matrix Gain."
+		  MaskHelp		  "Multiplies input vector by entered "
+"matrix to produce output vector (y=Au)."
+		  MaskPromptString	  "Gain matrix:"
+		  MaskStyleString	  "edit"
+		  MaskTunableValueString  "on"
+		  MaskInitialization	  "K = @1;"
+		  MaskDisplay		  "disp('K')"
+		  MaskIconFrame		  on
+		  MaskIconOpaque	  on
+		  MaskIconRotate	  none
+		  MaskIconUnits		  autoscale
+		  MaskValueString	  "Qtot_p"
+		}
+		Block {
+		  BlockType		  Mux
+		  Name			  "Mux"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [455, 121, 490, 154]
+		  Inputs		  "2"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso. Ltot"
+		  Position		  [315, 213, 375, 247]
+		  MATLABFcn		  "legev_bv(u,knot_y_p,order_y_p)"
+		  OutputWidth		  "length(order_y_p)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso. M3"
+		  Position		  [320, 288, 380, 322]
+		  MATLABFcn		  "legev_bv(u,knot_a3_p,order_a3_p)"
+		  OutputWidth		  "length(order_a3_p)"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum"
+		  Ports			  [3, 1, 0, 0, 0]
+		  Position		  [715, 126, 740, 204]
+		  Inputs		  "+++"
+		}
+		Block {
+		  BlockType		  UnitDelay
+		  Name			  "Unit Delay"
+		  Position		  [770, 143, 810, 187]
+		  X0			  "0"
+		  SampleTime		  "TSAMPLEP"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [915, 165, 935, 185]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "in_1"
+		  SrcPort		  1
+		  Points		  [65, 0]
+		  Branch {
+		    DstBlock		    "Average\nBlock"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -100]
+		    DstBlock		    "Mux"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Average\nBlock"
+		  SrcPort		  1
+		  Points		  [10, 0]
+		  Branch {
+		    DstBlock		    "Scheduling parameter\nAsso. Ltot"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 75]
+		    DstBlock		    "Scheduling parameter\nAsso. M3"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Unit Delay"
+		  SrcPort		  1
+		  Points		  [15, 0; 0, 10]
+		  Branch {
+		    Points		    [0, 110]
+		    DstBlock		    "A Matrix"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "Matrix\nGain1"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "A Matrix"
+		  SrcPort		  1
+		  Points		  [-85, 0; 0, -95]
+		  DstBlock		  "Sum"
+		  DstPort		  3
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso. M3"
+		  SrcPort		  1
+		  DstBlock		  "M3 contribution"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "M3 contribution"
+		  SrcPort		  1
+		  Points		  [50, 0; 0, -140]
+		  DstBlock		  "Sum"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Ltot contribution"
+		  SrcPort		  1
+		  DstBlock		  "Sum"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso. Ltot"
+		  SrcPort		  1
+		  Points		  [30, 0; 0, -85]
+		  DstBlock		  "Mux"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Mux"
+		  SrcPort		  1
+		  DstBlock		  "Ltot contribution"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Sum"
+		  SrcPort		  1
+		  DstBlock		  "Unit Delay"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Matrix\nGain1"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Numerator\nBlock"
+	      Ports		      [1, 1, 0, 0, 0]
+	      Position		      [140, 45, 210, 95]
+	      ShowPortLabels	      on
+	      System {
+		Name			"Numerator\nBlock"
+		Location		[89, 110, 930, 683]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		white
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Inport
+		  Name			  "in_1"
+		  Position		  [65, 220, 85, 240]
+		  Port			  "1"
+		  PortWidth		  "-1"
+		  SampleTime		  "-1"
+		}
+		Block {
+		  BlockType		  StateSpace
+		  Name			  "A Matrix"
+		  Position		  [755, 271, 780, 299]
+		  Orientation		  left
+		  A			  "[]"
+		  B			  "[]"
+		  C			  "[]"
+		  D			  "K"
+		  X0			  "0"
+		  MaskType		  "Matrix Gain"
+		  MaskDescription	  "Matrix Gain."
+		  MaskHelp		  "Multiplies input vector by entered "
+"matrix to produce output vector (y=Au)."
+		  MaskPromptString	  "Gain matrix:"
+		  MaskStyleString	  "edit"
+		  MaskTunableValueString  "on"
+		  MaskInitialization	  "K = @1;"
+		  MaskDisplay		  "disp('K')"
+		  MaskIconFrame		  on
+		  MaskIconOpaque	  on
+		  MaskIconRotate	  none
+		  MaskIconUnits		  autoscale
+		  MaskValueString	  "(eye(size(Ftot_p))+TSAMPLEP*Ftot_p)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Average\nBlock"
+		  Position		  [190, 213, 250, 247]
+		  MATLABFcn		  "mean(u)"
+		  OutputWidth		  "1"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Btot contribution"
+		  Position		  [545, 128, 605, 162]
+		  MATLABFcn		  "Btot_p*kron(eye(noutp_p),u(ninp_p+1"
+":ninp_p+length(order_u_p)))*u(1:ninp_p)*TSAMPLEP"
+		  OutputWidth		  "length(Ftot_p)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Dtot contribution1"
+		  Position		  [665, 388, 725, 422]
+		  MATLABFcn		  "Dtot_p*kron(eye(noutp_p),u(ninp_p+1"
+":ninp_p+length(order_d_p)))*u(1:ninp_p)"
+		  OutputWidth		  "noutp_p"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "M3 contribution"
+		  Position		  [665, 488, 725, 522]
+		  MATLABFcn		  "M5_p*kron(eye(noutp_p),u)*ones(nout"
+"p_p,1)"
+		  OutputWidth		  "noutp_p"
+		}
+		Block {
+		  BlockType		  StateSpace
+		  Name			  "Matrix\nGain1"
+		  Position		  [870, 161, 895, 189]
+		  A			  "[]"
+		  B			  "[]"
+		  C			  "[]"
+		  D			  "K"
+		  X0			  "0"
+		  MaskType		  "Matrix Gain"
+		  MaskDescription	  "Matrix Gain."
+		  MaskHelp		  "Multiplies input vector by entered "
+"matrix to produce output vector (y=Au)."
+		  MaskPromptString	  "Gain matrix:"
+		  MaskStyleString	  "edit"
+		  MaskTunableValueString  "on"
+		  MaskInitialization	  "K = @1;"
+		  MaskDisplay		  "disp('K')"
+		  MaskIconFrame		  on
+		  MaskIconOpaque	  on
+		  MaskIconRotate	  none
+		  MaskIconUnits		  autoscale
+		  MaskValueString	  "Qtot_p"
+		}
+		Block {
+		  BlockType		  Mux
+		  Name			  "Mux"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [455, 126, 490, 159]
+		  Inputs		  "2"
+		}
+		Block {
+		  BlockType		  Mux
+		  Name			  "Mux1"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [510, 375, 545, 430]
+		  Inputs		  "2"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso. Btot"
+		  Position		  [315, 213, 375, 247]
+		  MATLABFcn		  "legev_bv(u,knot_u_p,order_u_p)"
+		  OutputWidth		  "length(order_u_p)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso. Dtot"
+		  Position		  [325, 398, 385, 432]
+		  MATLABFcn		  "legev_bv(u,knot_d_p,order_d_p)"
+		  OutputWidth		  "length(order_d_p)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso.M5"
+		  Position		  [325, 488, 385, 522]
+		  MATLABFcn		  "legev_bv(u,knot_a5_p,order_a5_p)"
+		  OutputWidth		  "length(order_a5_p)"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [725, 126, 750, 204]
+		  Inputs		  "++"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum1"
+		  Ports			  [3, 1, 0, 0, 0]
+		  Position		  [1025, 161, 1050, 239]
+		  Inputs		  "+++"
+		}
+		Block {
+		  BlockType		  UnitDelay
+		  Name			  "Unit Delay"
+		  Position		  [770, 143, 810, 187]
+		  X0			  "xx0_p(:,1)"
+		  SampleTime		  "TSAMPLEP"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [1140, 190, 1160, 210]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "Sum"
+		  SrcPort		  1
+		  DstBlock		  "Unit Delay"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Mux"
+		  SrcPort		  1
+		  DstBlock		  "Btot contribution"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso. Btot"
+		  SrcPort		  1
+		  Points		  [30, 0; 0, -80]
+		  DstBlock		  "Mux"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Btot contribution"
+		  SrcPort		  1
+		  DstBlock		  "Sum"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Unit Delay"
+		  SrcPort		  1
+		  Points		  [15, 0; 0, 10]
+		  Branch {
+		    Points		    [0, 110]
+		    DstBlock		    "A Matrix"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "Matrix\nGain1"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "A Matrix"
+		  SrcPort		  1
+		  Points		  [-50, 0; 0, -100]
+		  DstBlock		  "Sum"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "in_1"
+		  SrcPort		  1
+		  Points		  [65, 0]
+		  Branch {
+		    DstBlock		    "Average\nBlock"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -5]
+		    Branch {
+		    Points		    [0, -90]
+		    DstBlock		    "Mux"
+		    DstPort		    1
+		    }
+		    Branch {
+		    Points		    [0, 165]
+		    DstBlock		    "Mux1"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso. Dtot"
+		  SrcPort		  1
+		  DstBlock		  "Mux1"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Mux1"
+		  SrcPort		  1
+		  DstBlock		  "Dtot contribution1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Average\nBlock"
+		  SrcPort		  1
+		  Points		  [10, 0]
+		  Branch {
+		    DstBlock		    "Scheduling parameter\nAsso. Btot"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 185]
+		    Branch {
+		    DstBlock		    "Scheduling parameter\nAsso. Dtot"
+		    DstPort		    1
+		    }
+		    Branch {
+		    Points		    [0, 90]
+		    DstBlock		    "Scheduling parameter\nAsso.M5"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso.M5"
+		  SrcPort		  1
+		  DstBlock		  "M3 contribution"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Matrix\nGain1"
+		  SrcPort		  1
+		  DstBlock		  "Sum1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Dtot contribution1"
+		  SrcPort		  1
+		  Points		  [190, 0; 0, -205]
+		  DstBlock		  "Sum1"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "M3 contribution"
+		  SrcPort		  1
+		  Points		  [240, 0; 0, -280]
+		  DstBlock		  "Sum1"
+		  DstPort		  3
+		}
+		Line {
+		  SrcBlock		  "Sum1"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Sum"
+	      Ports		      [3, 1, 0, 0, 0]
+	      Position		      [265, 56, 290, 134]
+	      Inputs		      "+++"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "profile"
+	      Position		      [510, 85, 530, 105]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "Sum"
+	      SrcPort		      1
+	      Points		      [140, 0]
+	      Branch {
+		DstBlock		"profile"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 110]
+		DstBlock		"Denominator\nBlock"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Numerator\nBlock"
+	      SrcPort		      1
+	      DstBlock		      "Sum"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "spike1"
+	      SrcPort		      1
+	      DstBlock		      "Numerator\nBlock"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Denominator\nBlock"
+	      SrcPort		      1
+	      Points		      [-70, 0]
+	      DstBlock		      "Sum"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "error"
+	      SrcPort		      1
+	      Points		      [165, 0; 0, -65]
+	      DstBlock		      "Sum"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Nonlinear\nSpike\nModel"
+	  Ports			  [2, 1, 0, 0, 0]
+	  Position		  [275, 136, 340, 189]
+	  ShowPortLabels	  on
+	  System {
+	    Name		    "Nonlinear\nSpike\nModel"
+	    Location		    [122, 314, 709, 624]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Inport
+	      Name		      "power"
+	      Position		      [35, 60, 55, 80]
+	      Port		      "1"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "error"
+	      Position		      [35, 125, 55, 145]
+	      Port		      "2"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Denominator\nBlock"
+	      Ports		      [1, 1, 0, 0, 0]
+	      Position		      [325, 180, 395, 230]
+	      Orientation	      left
+	      ShowPortLabels	      on
+	      System {
+		Name			"Denominator\nBlock"
+		Location		[4, 168, 1014, 548]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		white
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Inport
+		  Name			  "in_1"
+		  Position		  [65, 220, 85, 240]
+		  Port			  "1"
+		  PortWidth		  "-1"
+		  SampleTime		  "-1"
+		}
+		Block {
+		  BlockType		  StateSpace
+		  Name			  "A Matrix"
+		  Position		  [780, 271, 805, 299]
+		  Orientation		  left
+		  A			  "[]"
+		  B			  "[]"
+		  C			  "[]"
+		  D			  "K"
+		  X0			  "0"
+		  MaskType		  "Matrix Gain"
+		  MaskDescription	  "Matrix Gain."
+		  MaskHelp		  "Multiplies input vector by entered "
+"matrix to produce output vector (y=Au)."
+		  MaskPromptString	  "Gain matrix:"
+		  MaskStyleString	  "edit"
+		  MaskTunableValueString  "on"
+		  MaskInitialization	  "K = @1;"
+		  MaskDisplay		  "disp('K')"
+		  MaskIconFrame		  on
+		  MaskIconOpaque	  on
+		  MaskIconRotate	  none
+		  MaskIconUnits		  autoscale
+		  MaskValueString	  "(eye(size(Ftot_s))+TSAMPLEP*Ftot_s)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Average\nBlock"
+		  Position		  [180, 213, 240, 247]
+		  MATLABFcn		  "mean(u)"
+		  OutputWidth		  "1"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Ltot contribution"
+		  Position		  [535, 123, 595, 157]
+		  MATLABFcn		  "Ltot_s*kron(eye(noutp_s),u(4:7))*u("
+"1:3)*TSAMPLEP"
+		  OutputWidth		  "length(Ftot_s)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "M3 contribution"
+		  Position		  [535, 288, 595, 322]
+		  MATLABFcn		  "M3_s*kron(eye(noutp_s),u)*ones(nout"
+"p_s,1)*TSAMPLEP"
+		  OutputWidth		  "length(Ftot_s)"
+		}
+		Block {
+		  BlockType		  StateSpace
+		  Name			  "Matrix\nGain1"
+		  Position		  [860, 161, 885, 189]
+		  A			  "[]"
+		  B			  "[]"
+		  C			  "[]"
+		  D			  "K"
+		  X0			  "0"
+		  MaskType		  "Matrix Gain"
+		  MaskDescription	  "Matrix Gain."
+		  MaskHelp		  "Multiplies input vector by entered "
+"matrix to produce output vector (y=Au)."
+		  MaskPromptString	  "Gain matrix:"
+		  MaskStyleString	  "edit"
+		  MaskTunableValueString  "on"
+		  MaskInitialization	  "K = @1;"
+		  MaskDisplay		  "disp('K')"
+		  MaskIconFrame		  on
+		  MaskIconOpaque	  on
+		  MaskIconRotate	  none
+		  MaskIconUnits		  autoscale
+		  MaskValueString	  "Qtot_s"
+		}
+		Block {
+		  BlockType		  Mux
+		  Name			  "Mux"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [455, 121, 490, 154]
+		  Inputs		  "2"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso. Ltot"
+		  Position		  [315, 213, 375, 247]
+		  MATLABFcn		  "legev_bv(u,knot_y_s,order_y_s)"
+		  OutputWidth		  "length(order_y_s)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso. M3"
+		  Position		  [320, 288, 380, 322]
+		  MATLABFcn		  "legev_bv(u,knot_a3_s,order_a3_s)"
+		  OutputWidth		  "length(order_a3_s)"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum"
+		  Ports			  [3, 1, 0, 0, 0]
+		  Position		  [715, 126, 740, 204]
+		  Inputs		  "+++"
+		}
+		Block {
+		  BlockType		  UnitDelay
+		  Name			  "Unit Delay"
+		  Position		  [770, 143, 810, 187]
+		  X0			  "0"
+		  SampleTime		  "TSAMPLEP"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [915, 165, 935, 185]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "Matrix\nGain1"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Sum"
+		  SrcPort		  1
+		  DstBlock		  "Unit Delay"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Mux"
+		  SrcPort		  1
+		  DstBlock		  "Ltot contribution"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso. Ltot"
+		  SrcPort		  1
+		  Points		  [30, 0; 0, -85]
+		  DstBlock		  "Mux"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Ltot contribution"
+		  SrcPort		  1
+		  DstBlock		  "Sum"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "M3 contribution"
+		  SrcPort		  1
+		  Points		  [50, 0; 0, -140]
+		  DstBlock		  "Sum"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso. M3"
+		  SrcPort		  1
+		  DstBlock		  "M3 contribution"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "A Matrix"
+		  SrcPort		  1
+		  Points		  [-85, 0; 0, -95]
+		  DstBlock		  "Sum"
+		  DstPort		  3
+		}
+		Line {
+		  SrcBlock		  "Unit Delay"
+		  SrcPort		  1
+		  Points		  [15, 0; 0, 10]
+		  Branch {
+		    Points		    [0, 110]
+		    DstBlock		    "A Matrix"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "Matrix\nGain1"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Average\nBlock"
+		  SrcPort		  1
+		  Points		  [10, 0]
+		  Branch {
+		    DstBlock		    "Scheduling parameter\nAsso. Ltot"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 75]
+		    DstBlock		    "Scheduling parameter\nAsso. M3"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "in_1"
+		  SrcPort		  1
+		  Points		  [65, 0]
+		  Branch {
+		    DstBlock		    "Average\nBlock"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -100]
+		    DstBlock		    "Mux"
+		    DstPort		    1
+		  }
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Numerator\nBlock"
+	      Ports		      [1, 1, 0, 0, 0]
+	      Position		      [120, 46, 185, 94]
+	      ShowPortLabels	      on
+	      System {
+		Name			"Numerator\nBlock"
+		Location		[-50, 66, 978, 784]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		white
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Inport
+		  Name			  "in_1"
+		  Position		  [65, 220, 85, 240]
+		  Port			  "1"
+		  PortWidth		  "-1"
+		  SampleTime		  "-1"
+		}
+		Block {
+		  BlockType		  StateSpace
+		  Name			  "A Matrix"
+		  Position		  [755, 271, 780, 299]
+		  Orientation		  left
+		  A			  "[]"
+		  B			  "[]"
+		  C			  "[]"
+		  D			  "K"
+		  X0			  "0"
+		  MaskType		  "Matrix Gain"
+		  MaskDescription	  "Matrix Gain."
+		  MaskHelp		  "Multiplies input vector by entered "
+"matrix to produce output vector (y=Au)."
+		  MaskPromptString	  "Gain matrix:"
+		  MaskStyleString	  "edit"
+		  MaskTunableValueString  "on"
+		  MaskInitialization	  "K = @1;"
+		  MaskDisplay		  "disp('K')"
+		  MaskIconFrame		  on
+		  MaskIconOpaque	  on
+		  MaskIconRotate	  none
+		  MaskIconUnits		  autoscale
+		  MaskValueString	  "(eye(size(Ftot_s))+TSAMPLEP*Ftot_s)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Average\nBlock"
+		  Position		  [190, 213, 250, 247]
+		  MATLABFcn		  "mean(u)"
+		  OutputWidth		  "1"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Btot contribution"
+		  Position		  [545, 128, 605, 162]
+		  MATLABFcn		  "Btot_s*kron(eye(noutp_s),u(ninp_s+1"
+":ninp_s+length(order_u_s)))*u(1:ninp_s)*TSAMPLEP"
+		  OutputWidth		  "length(Ftot_s)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Dtot contribution1"
+		  Position		  [665, 388, 725, 422]
+		  MATLABFcn		  "Dtot_s*kron(eye(noutp_s),u(ninp_s+1"
+":ninp_s+length(order_d_s)))*u(1:ninp_s)"
+		  OutputWidth		  "noutp_s"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "M3 contribution"
+		  Position		  [665, 488, 725, 522]
+		  MATLABFcn		  "M5_s*kron(eye(noutp_s),u)*ones(nout"
+"p_s,1)"
+		  OutputWidth		  "noutp_s"
+		}
+		Block {
+		  BlockType		  StateSpace
+		  Name			  "Matrix\nGain1"
+		  Position		  [870, 161, 895, 189]
+		  A			  "[]"
+		  B			  "[]"
+		  C			  "[]"
+		  D			  "K"
+		  X0			  "0"
+		  MaskType		  "Matrix Gain"
+		  MaskDescription	  "Matrix Gain."
+		  MaskHelp		  "Multiplies input vector by entered "
+"matrix to produce output vector (y=Au)."
+		  MaskPromptString	  "Gain matrix:"
+		  MaskStyleString	  "edit"
+		  MaskTunableValueString  "on"
+		  MaskInitialization	  "K = @1;"
+		  MaskDisplay		  "disp('K')"
+		  MaskIconFrame		  on
+		  MaskIconOpaque	  on
+		  MaskIconRotate	  none
+		  MaskIconUnits		  autoscale
+		  MaskValueString	  "Qtot_s"
+		}
+		Block {
+		  BlockType		  Mux
+		  Name			  "Mux"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [455, 126, 490, 159]
+		  Inputs		  "2"
+		}
+		Block {
+		  BlockType		  Mux
+		  Name			  "Mux1"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [510, 375, 545, 430]
+		  Inputs		  "2"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso. Btot"
+		  Position		  [315, 213, 375, 247]
+		  MATLABFcn		  "legev_bv(u,knot_u_s,order_u_s)"
+		  OutputWidth		  "length(order_u_s)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso. Dtot"
+		  Position		  [325, 398, 385, 432]
+		  MATLABFcn		  "legev_bv(u,knot_d_s,order_d_s)"
+		  OutputWidth		  "length(order_d_s)"
+		}
+		Block {
+		  BlockType		  MATLABFcn
+		  Name			  "Scheduling parameter\nAsso.M5"
+		  Position		  [325, 488, 385, 522]
+		  MATLABFcn		  "legev_bv(u,knot_a5_s,order_a5_s)"
+		  OutputWidth		  "length(order_a5_s)"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [725, 126, 750, 204]
+		  Inputs		  "++"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum1"
+		  Ports			  [3, 1, 0, 0, 0]
+		  Position		  [1025, 161, 1050, 239]
+		  Inputs		  "+++"
+		}
+		Block {
+		  BlockType		  UnitDelay
+		  Name			  "Unit Delay"
+		  Position		  [770, 143, 810, 187]
+		  X0			  "xx0_s(:,1)"
+		  SampleTime		  "TSAMPLEP"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [1140, 190, 1160, 210]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "Sum1"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "M3 contribution"
+		  SrcPort		  1
+		  Points		  [240, 0; 0, -280]
+		  DstBlock		  "Sum1"
+		  DstPort		  3
+		}
+		Line {
+		  SrcBlock		  "Dtot contribution1"
+		  SrcPort		  1
+		  Points		  [190, 0; 0, -205]
+		  DstBlock		  "Sum1"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Matrix\nGain1"
+		  SrcPort		  1
+		  DstBlock		  "Sum1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso.M5"
+		  SrcPort		  1
+		  DstBlock		  "M3 contribution"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Average\nBlock"
+		  SrcPort		  1
+		  Points		  [10, 0]
+		  Branch {
+		    DstBlock		    "Scheduling parameter\nAsso. Btot"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 185]
+		    Branch {
+		    DstBlock		    "Scheduling parameter\nAsso. Dtot"
+		    DstPort		    1
+		    }
+		    Branch {
+		    Points		    [0, 90]
+		    DstBlock		    "Scheduling parameter\nAsso.M5"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Line {
+		  SrcBlock		  "Mux1"
+		  SrcPort		  1
+		  DstBlock		  "Dtot contribution1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso. Dtot"
+		  SrcPort		  1
+		  DstBlock		  "Mux1"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "in_1"
+		  SrcPort		  1
+		  Points		  [65, 0]
+		  Branch {
+		    DstBlock		    "Average\nBlock"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -5]
+		    Branch {
+		    Points		    [0, -90]
+		    DstBlock		    "Mux"
+		    DstPort		    1
+		    }
+		    Branch {
+		    Points		    [0, 165]
+		    DstBlock		    "Mux1"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Line {
+		  SrcBlock		  "A Matrix"
+		  SrcPort		  1
+		  Points		  [-50, 0; 0, -100]
+		  DstBlock		  "Sum"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Unit Delay"
+		  SrcPort		  1
+		  Points		  [15, 0; 0, 10]
+		  Branch {
+		    Points		    [0, 110]
+		    DstBlock		    "A Matrix"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "Matrix\nGain1"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Btot contribution"
+		  SrcPort		  1
+		  DstBlock		  "Sum"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Scheduling parameter\nAsso. Btot"
+		  SrcPort		  1
+		  Points		  [30, 0; 0, -80]
+		  DstBlock		  "Mux"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Mux"
+		  SrcPort		  1
+		  DstBlock		  "Btot contribution"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Sum"
+		  SrcPort		  1
+		  DstBlock		  "Unit Delay"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Sum"
+	      Ports		      [3, 1, 0, 0, 0]
+	      Position		      [265, 56, 290, 134]
+	      Inputs		      "+++"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "spike"
+	      Position		      [510, 85, 530, 105]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "power"
+	      SrcPort		      1
+	      DstBlock		      "Numerator\nBlock"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Numerator\nBlock"
+	      SrcPort		      1
+	      DstBlock		      "Sum"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Sum"
+	      SrcPort		      1
+	      Points		      [140, 0]
+	      Branch {
+		DstBlock		"spike"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 110]
+		DstBlock		"Denominator\nBlock"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Denominator\nBlock"
+	      SrcPort		      1
+	      Points		      [-70, 0]
+	      DstBlock		      "Sum"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "error"
+	      SrcPort		      1
+	      Points		      [150, 0; 0, -40]
+	      DstBlock		      "Sum"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Product
+	  Name			  "Product"
+	  Ports			  [2, 1, 0, 0, 0]
+	  Position		  [100, 138, 130, 162]
+	  Inputs		  "2"
+	}
+	Block {
+	  BlockType		  Saturate
+	  Name			  "Saturation1"
+	  Position		  [155, 140, 180, 160]
+	  UpperLimit		  "[1 1 1]"
+	  LowerLimit		  "[0 0 0]"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum3"
+	  Ports			  [3, 1, 0, 0, 0]
+	  Position		  [620, 152, 640, 238]
+	  ForegroundColor	  red
+	  Inputs		  "+++"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum6"
+	  Ports			  [3, 1, 0, 0, 0]
+	  Position		  [395, 119, 415, 211]
+	  ForegroundColor	  red
+	  Inputs		  "+++"
+	}
+	Block {
+	  BlockType		  Sum
+	  Name			  "Sum7"
+	  Ports			  [2, 1, 0, 0, 0]
+	  Position		  [245, 388, 265, 432]
+	  Orientation		  left
+	  ForegroundColor	  red
+	  Inputs		  "++"
+	}
+	Block {
+	  BlockType		  UniformRandomNumber
+	  Name			  "Uniform Random\nNumber"
+	  Position		  [310, 74, 340, 106]
+	  Minimum		  "-.2"
+	  Maximum		  ".2"
+	  Seed			  "0"
+	  SampleTime		  ".5/60"
+	}
+	Block {
+	  BlockType		  UniformRandomNumber
+	  Name			  "Uniform Random\nNumber1"
+	  Position		  [505, 239, 535, 271]
+	  Minimum		  "-.1"
+	  Maximum		  ".1"
+	  Seed			  "0"
+	  SampleTime		  ".5/60"
+	}
+	Block {
+	  BlockType		  UnitDelay
+	  Name			  "Unit Delay1"
+	  Position		  [205, 138, 230, 162]
+	  ForegroundColor	  blue
+	  X0			  "0"
+	  SampleTime		  "TSAMPLEP"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "abort"
+	  Ports			  [1, 1, 0, 0, 0]
+	  Position		  [95, 384, 160, 436]
+	  Orientation		  left
+	  ShowPortLabels	  on
+	  System {
+	    Name		    "abort"
+	    Location		    [308, 538, 875, 708]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_1"
+	      Position		      [10, 75, 30, 95]
+	      Port		      "1"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Abs
+	      Name		      "Abs"
+	      Position		      [60, 73, 90, 97]
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [300, 165, 320, 185]
+	      Value		      "1"
+	    }
+	    Block {
+	      BlockType		      RelationalOperator
+	      Name		      "Relational\nOperator"
+	      Position		      [345, 83, 375, 107]
+	      Operator		      ">="
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Sum"
+	      Ports		      [2, 1, 0, 0, 0]
+	      Position		      [165, 80, 185, 100]
+	      Inputs		      "++"
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Sum1"
+	      Ports		      [2, 1, 0, 0, 0]
+	      Position		      [445, 90, 465, 110]
+	      Inputs		      "-+"
+	    }
+	    Block {
+	      BlockType		      UnitDelay
+	      Name		      "Unit Delay3"
+	      Position		      [235, 78, 260, 102]
+	      ForegroundColor	      blue
+	      X0		      "0"
+	      SampleTime	      "TSAMPLEP"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "out_1"
+	      Position		      [525, 90, 545, 110]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "Sum1"
+	      SrcPort		      1
+	      DstBlock		      "out_1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Relational\nOperator"
+	      SrcPort		      1
+	      DstBlock		      "Sum1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      Points		      [0, 0]
+	      Branch {
+		Points			[75, 0; 0, -70]
+		DstBlock		"Sum1"
+		DstPort			2
+	      }
+	      Branch {
+		Points			[5, 0]
+		DstBlock		"Relational\nOperator"
+		DstPort			2
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Unit Delay3"
+	      SrcPort		      1
+	      Points		      [0, 0]
+	      Branch {
+		DstBlock		"Relational\nOperator"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[10, 0; 0, 40; -130, 0; 0, -35]
+		DstBlock		"Sum"
+		DstPort			2
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "in_1"
+	      SrcPort		      1
+	      DstBlock		      "Abs"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Sum"
+	      SrcPort		      1
+	      DstBlock		      "Unit Delay3"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Abs"
+	      SrcPort		      1
+	      DstBlock		      "Sum"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "disturbance"
+	  Ports			  [0, 2, 0, 0, 0]
+	  Position		  [510, 307, 540, 358]
+	  Orientation		  left
+	  ShowPortLabels	  on
+	  System {
+	    Name		    "disturbance"
+	    Location		    [332, 84, 953, 289]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      DiscreteTransferFcn
+	      Name		      "Discrete\nTransfer Fcn"
+	      Position		      [80, 42, 140, 78]
+	      Orientation	      left
+	      Numerator		      "[1]"
+	      Denominator	      "[.5/TSAMPLEP 1-.5/TSAMPLEP]"
+	      SampleTime	      "TSAMPLEP"
+	    }
+	    Block {
+	      BlockType		      DiscreteTransferFcn
+	      Name		      "Discrete\nTransfer Fcn1"
+	      Position		      [190, 112, 250, 148]
+	      Orientation	      left
+	      Numerator		      "[10/TSAMPLEP -10/TSAMPLEP]"
+	      Denominator	      "[10/TSAMPLEP 1-10/TSAMPLEP]"
+	      SampleTime	      "TSAMPLEP"
+	    }
+	    Block {
+	      BlockType		      DiscreteTransferFcn
+	      Name		      "Discrete\nTransfer Fcn2"
+	      Position		      [335, 102, 395, 138]
+	      Orientation	      left
+	      Numerator		      "[1]"
+	      Denominator	      "[2/TSAMPLEP 1-2/TSAMPLEP]"
+	      SampleTime	      "TSAMPLEP"
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "Sum4"
+	      Ports		      [2, 1, 0, 0, 0]
+	      Position		      [280, 24, 300, 91]
+	      Orientation	      left
+	      Inputs		      "++"
+	    }
+	    Block {
+	      BlockType		      Step
+	      Name		      "disturbance"
+	      Position		      [480, 30, 500, 50]
+	      Orientation	      left
+	      BackgroundColor	      yellow
+	      Time		      "55"
+	      Before		      "0"
+	      After		      "10"
+	    }
+	    Block {
+	      BlockType		      Step
+	      Name		      "disturbance2"
+	      Position		      [485, 110, 505, 130]
+	      Orientation	      left
+	      BackgroundColor	      yellow
+	      Time		      "75"
+	      Before		      "0"
+	      After		      "-5"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "spike"
+	      Position		      [25, 53, 55, 67]
+	      Orientation	      left
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "profile"
+	      Position		      [25, 123, 55, 137]
+	      Orientation	      left
+	      Port		      "2"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "Discrete\nTransfer Fcn1"
+	      SrcPort		      1
+	      DstBlock		      "profile"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Discrete\nTransfer Fcn"
+	      SrcPort		      1
+	      DstBlock		      "spike"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Sum4"
+	      SrcPort		      1
+	      Points		      [-10, 0; 0, 25]
+	      Branch {
+		Points			[0, -25]
+		DstBlock		"Discrete\nTransfer Fcn"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"Discrete\nTransfer Fcn1"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "disturbance"
+	      SrcPort		      1
+	      DstBlock		      "Sum4"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "disturbance2"
+	      SrcPort		      1
+	      DstBlock		      "Discrete\nTransfer Fcn2"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Discrete\nTransfer Fcn2"
+	      SrcPort		      1
+	      Points		      [0, -45]
+	      DstBlock		      "Sum4"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "overtemp"
+	  Ports			  [1, 1, 0, 0, 0]
+	  Position		  [565, 402, 630, 438]
+	  Orientation		  left
+	  ShowPortLabels	  on
+	  System {
+	    Name		    "overtemp"
+	    Location		    [200, 370, 641, 613]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_1"
+	      Position		      [10, 50, 30, 70]
+	      Port		      "1"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [80, 113, 150, 147]
+	      Value		      "950"
+	    }
+	    Block {
+	      BlockType		      RelationalOperator
+	      Name		      "Relational\nOperator"
+	      Position		      [235, 73, 265, 97]
+	      Operator		      ">"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "out_1"
+	      Position		      [350, 75, 370, 95]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "in_1"
+	      SrcPort		      1
+	      Points		      [90, 0; 0, 20]
+	      DstBlock		      "Relational\nOperator"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Relational\nOperator"
+	      SrcPort		      1
+	      DstBlock		      "out_1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      Points		      [15, 0; 0, -40]
+	      DstBlock		      "Relational\nOperator"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "overtemp1"
+	  Ports			  [1, 1, 0, 0, 0]
+	  Position		  [370, 341, 425, 379]
+	  ShowPortLabels	  on
+	  System {
+	    Name		    "overtemp1"
+	    Location		    [200, 370, 641, 613]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Inport
+	      Name		      "in_1"
+	      Position		      [10, 50, 30, 70]
+	      Port		      "1"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [80, 113, 150, 147]
+	      Value		      "1000"
+	    }
+	    Block {
+	      BlockType		      RelationalOperator
+	      Name		      "Relational\nOperator"
+	      Position		      [235, 73, 265, 97]
+	      Operator		      ">"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "out_1"
+	      Position		      [350, 75, 370, 95]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "in_1"
+	      SrcPort		      1
+	      Points		      [90, 0; 0, 20]
+	      DstBlock		      "Relational\nOperator"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Relational\nOperator"
+	      SrcPort		      1
+	      DstBlock		      "out_1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      Points		      [15, 0; 0, -40]
+	      DstBlock		      "Relational\nOperator"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "profile_error"
+	  Ports			  [0, 1, 0, 0, 0]
+	  Position		  [445, 155, 475, 205]
+	  ShowPortLabels	  on
+	  System {
+	    Name		    "profile_error"
+	    Location		    [4, 325, 349, 580]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Mux
+	      Name		      "Mux1"
+	      Ports		      [3, 1, 0, 0, 0]
+	      Position		      [175, 109, 205, 141]
+	      Inputs		      "3"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "prof error"
+	      Ports		      [0, 1, 0, 0, 0]
+	      Position		      [50, 60, 85, 100]
+	      BackgroundColor	      yellow
+	      ShowPortLabels	      off
+	      MaskType		      "Repeating table"
+	      MaskDescription	      "Repeating table.\nEnter values of time "
+"and output for first cycle."
+	      MaskHelp		      "Repeats cycle given in table. Time valu"
+"es should be monotonically increasing."
+	      MaskPromptString	      "Time values:|Output values:"
+	      MaskStyleString	      "edit,edit"
+	      MaskTunableValueString  "on,on"
+	      MaskInitialization      "period = max(@1); t = @1; y = @2;"
+	      MaskDisplay	      "plot([t,t+period,t+2*period],[y,y,y])"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      none
+	      MaskIconUnits	      autoscale
+	      MaskValueString	      "TEPRO|FEP1"
+	      System {
+		Name			"prof error"
+		Location		[5, 42, 454, 262]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		yellow
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Clock
+		  Name			  "Clock"
+		  Position		  [45, 60, 65, 80]
+		  Location		  [30, 40, 140, 75]
+		}
+		Block {
+		  BlockType		  Fcn
+		  Name			  "Fcn1"
+		  Position		  [110, 60, 150, 80]
+		  Expr			  "rem(u[1],period)"
+		}
+		Block {
+		  BlockType		  Lookup
+		  Name			  "Look-Up Table"
+		  Position		  [210, 58, 250, 82]
+		  InputValues		  "t"
+		  OutputValues		  "y"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [285, 60, 305, 80]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "Look-Up Table"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Clock"
+		  SrcPort		  1
+		  DstBlock		  "Fcn1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Fcn1"
+		  SrcPort		  1
+		  DstBlock		  "Look-Up Table"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "prof error1"
+	      Ports		      [0, 1, 0, 0, 0]
+	      Position		      [65, 115, 100, 155]
+	      BackgroundColor	      yellow
+	      ShowPortLabels	      off
+	      MaskType		      "Repeating table"
+	      MaskDescription	      "Repeating table.\nEnter values of time "
+"and output for first cycle."
+	      MaskHelp		      "Repeats cycle given in table. Time valu"
+"es should be monotonically increasing."
+	      MaskPromptString	      "Time values:|Output values:"
+	      MaskStyleString	      "edit,edit"
+	      MaskTunableValueString  "on,on"
+	      MaskInitialization      "period = max(@1); t = @1; y = @2;"
+	      MaskDisplay	      "plot([t,t+period,t+2*period],[y,y,y])"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      none
+	      MaskIconUnits	      autoscale
+	      MaskValueString	      "TEPRO|FEP2"
+	      System {
+		Name			"prof error1"
+		Location		[5, 42, 454, 262]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		yellow
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Clock
+		  Name			  "Clock"
+		  Position		  [45, 60, 65, 80]
+		  Location		  [30, 40, 140, 75]
+		}
+		Block {
+		  BlockType		  Fcn
+		  Name			  "Fcn1"
+		  Position		  [110, 60, 150, 80]
+		  Expr			  "rem(u[1],period)"
+		}
+		Block {
+		  BlockType		  Lookup
+		  Name			  "Look-Up Table"
+		  Position		  [210, 58, 250, 82]
+		  InputValues		  "t"
+		  OutputValues		  "y"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [285, 60, 305, 80]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "Look-Up Table"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Clock"
+		  SrcPort		  1
+		  DstBlock		  "Fcn1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Fcn1"
+		  SrcPort		  1
+		  DstBlock		  "Look-Up Table"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "prof error2"
+	      Ports		      [0, 1, 0, 0, 0]
+	      Position		      [90, 175, 125, 215]
+	      BackgroundColor	      yellow
+	      ShowPortLabels	      off
+	      MaskType		      "Repeating table"
+	      MaskDescription	      "Repeating table.\nEnter values of time "
+"and output for first cycle."
+	      MaskHelp		      "Repeats cycle given in table. Time valu"
+"es should be monotonically increasing."
+	      MaskPromptString	      "Time values:|Output values:"
+	      MaskStyleString	      "edit,edit"
+	      MaskTunableValueString  "on,on"
+	      MaskInitialization      "period = max(@1); t = @1; y = @2;"
+	      MaskDisplay	      "plot([t,t+period,t+2*period],[y,y,y])"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      none
+	      MaskIconUnits	      autoscale
+	      MaskValueString	      "TEPRO|FEP3"
+	      System {
+		Name			"prof error2"
+		Location		[5, 42, 454, 262]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		yellow
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Clock
+		  Name			  "Clock"
+		  Position		  [45, 60, 65, 80]
+		  Location		  [30, 40, 140, 75]
+		}
+		Block {
+		  BlockType		  Fcn
+		  Name			  "Fcn1"
+		  Position		  [110, 60, 150, 80]
+		  Expr			  "rem(u[1],period)"
+		}
+		Block {
+		  BlockType		  Lookup
+		  Name			  "Look-Up Table"
+		  Position		  [210, 58, 250, 82]
+		  InputValues		  "t"
+		  OutputValues		  "y"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [285, 60, 305, 80]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "Look-Up Table"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Clock"
+		  SrcPort		  1
+		  DstBlock		  "Fcn1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Fcn1"
+		  SrcPort		  1
+		  DstBlock		  "Look-Up Table"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "out_1"
+	      Position		      [250, 30, 270, 50]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "Mux1"
+	      SrcPort		      1
+	      Points		      [35, 0]
+	      DstBlock		      "out_1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "prof error"
+	      SrcPort		      1
+	      Points		      [35, 0; 0, 35]
+	      DstBlock		      "Mux1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "prof error1"
+	      SrcPort		      1
+	      Points		      [25, 0; 0, -10]
+	      DstBlock		      "Mux1"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "prof error2"
+	      SrcPort		      1
+	      Points		      [15, 0; 0, -60]
+	      DstBlock		      "Mux1"
+	      DstPort		      3
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "spike_error"
+	  Ports			  [0, 1, 0, 0, 0]
+	  Position		  [200, 180, 230, 230]
+	  ShowPortLabels	  on
+	  System {
+	    Name		    "spike_error"
+	    Location		    [4, 325, 349, 580]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Mux
+	      Name		      "Mux1"
+	      Ports		      [3, 1, 0, 0, 0]
+	      Position		      [175, 109, 205, 141]
+	      Inputs		      "3"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "spike error"
+	      Ports		      [0, 1, 0, 0, 0]
+	      Position		      [50, 60, 85, 100]
+	      BackgroundColor	      yellow
+	      ShowPortLabels	      off
+	      MaskType		      "Repeating table"
+	      MaskDescription	      "Repeating table.\nEnter values of time "
+"and output for first cycle."
+	      MaskHelp		      "Repeats cycle given in table. Time valu"
+"es should be monotonically increasing."
+	      MaskPromptString	      "Time values:|Output values:"
+	      MaskStyleString	      "edit,edit"
+	      MaskTunableValueString  "on,on"
+	      MaskInitialization      "period = max(@1); t = @1; y = @2;"
+	      MaskDisplay	      "plot([t,t+period,t+2*period],[y,y,y])"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      none
+	      MaskIconUnits	      autoscale
+	      MaskValueString	      "TEPRO|FES1"
+	      System {
+		Name			"spike error"
+		Location		[5, 42, 454, 262]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		yellow
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Clock
+		  Name			  "Clock"
+		  Position		  [45, 60, 65, 80]
+		  Location		  [30, 40, 140, 75]
+		}
+		Block {
+		  BlockType		  Fcn
+		  Name			  "Fcn1"
+		  Position		  [110, 60, 150, 80]
+		  Expr			  "rem(u[1],period)"
+		}
+		Block {
+		  BlockType		  Lookup
+		  Name			  "Look-Up Table"
+		  Position		  [210, 58, 250, 82]
+		  InputValues		  "t"
+		  OutputValues		  "y"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [285, 60, 305, 80]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "Look-Up Table"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Clock"
+		  SrcPort		  1
+		  DstBlock		  "Fcn1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Fcn1"
+		  SrcPort		  1
+		  DstBlock		  "Look-Up Table"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "spike error1"
+	      Ports		      [0, 1, 0, 0, 0]
+	      Position		      [65, 115, 100, 155]
+	      BackgroundColor	      yellow
+	      ShowPortLabels	      off
+	      MaskType		      "Repeating table"
+	      MaskDescription	      "Repeating table.\nEnter values of time "
+"and output for first cycle."
+	      MaskHelp		      "Repeats cycle given in table. Time valu"
+"es should be monotonically increasing."
+	      MaskPromptString	      "Time values:|Output values:"
+	      MaskStyleString	      "edit,edit"
+	      MaskTunableValueString  "on,on"
+	      MaskInitialization      "period = max(@1); t = @1; y = @2;"
+	      MaskDisplay	      "plot([t,t+period,t+2*period],[y,y,y])"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      none
+	      MaskIconUnits	      autoscale
+	      MaskValueString	      "TEPRO|FES2"
+	      System {
+		Name			"spike error1"
+		Location		[5, 42, 454, 262]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		yellow
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Clock
+		  Name			  "Clock"
+		  Position		  [45, 60, 65, 80]
+		  Location		  [30, 40, 140, 75]
+		}
+		Block {
+		  BlockType		  Fcn
+		  Name			  "Fcn1"
+		  Position		  [110, 60, 150, 80]
+		  Expr			  "rem(u[1],period)"
+		}
+		Block {
+		  BlockType		  Lookup
+		  Name			  "Look-Up Table"
+		  Position		  [210, 58, 250, 82]
+		  InputValues		  "t"
+		  OutputValues		  "y"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [285, 60, 305, 80]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "Look-Up Table"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Clock"
+		  SrcPort		  1
+		  DstBlock		  "Fcn1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Fcn1"
+		  SrcPort		  1
+		  DstBlock		  "Look-Up Table"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "spike error2"
+	      Ports		      [0, 1, 0, 0, 0]
+	      Position		      [90, 175, 125, 215]
+	      BackgroundColor	      yellow
+	      ShowPortLabels	      off
+	      MaskType		      "Repeating table"
+	      MaskDescription	      "Repeating table.\nEnter values of time "
+"and output for first cycle."
+	      MaskHelp		      "Repeats cycle given in table. Time valu"
+"es should be monotonically increasing."
+	      MaskPromptString	      "Time values:|Output values:"
+	      MaskStyleString	      "edit,edit"
+	      MaskTunableValueString  "on,on"
+	      MaskInitialization      "period = max(@1); t = @1; y = @2;"
+	      MaskDisplay	      "plot([t,t+period,t+2*period],[y,y,y])"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      none
+	      MaskIconUnits	      autoscale
+	      MaskValueString	      "TEPRO|FES3"
+	      System {
+		Name			"spike error2"
+		Location		[5, 42, 454, 262]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		yellow
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Clock
+		  Name			  "Clock"
+		  Position		  [45, 60, 65, 80]
+		  Location		  [30, 40, 140, 75]
+		}
+		Block {
+		  BlockType		  Fcn
+		  Name			  "Fcn1"
+		  Position		  [110, 60, 150, 80]
+		  Expr			  "rem(u[1],period)"
+		}
+		Block {
+		  BlockType		  Lookup
+		  Name			  "Look-Up Table"
+		  Position		  [210, 58, 250, 82]
+		  InputValues		  "t"
+		  OutputValues		  "y"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [285, 60, 305, 80]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "Look-Up Table"
+		  SrcPort		  1
+		  DstBlock		  "out_1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Clock"
+		  SrcPort		  1
+		  DstBlock		  "Fcn1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Fcn1"
+		  SrcPort		  1
+		  DstBlock		  "Look-Up Table"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "out_1"
+	      Position		      [260, 30, 280, 50]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "Mux1"
+	      SrcPort		      1
+	      Points		      [35, 0]
+	      DstBlock		      "out_1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "spike error"
+	      SrcPort		      1
+	      Points		      [35, 0; 0, 35]
+	      DstBlock		      "Mux1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "spike error1"
+	      SrcPort		      1
+	      Points		      [25, 0; 0, -10]
+	      DstBlock		      "Mux1"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "spike error2"
+	      SrcPort		      1
+	      Points		      [15, 0; 0, -60]
+	      DstBlock		      "Mux1"
+	      DstPort		      3
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "spike"
+	  Position		  [690, 15, 710, 35]
+	  Port			  "1"
+	  OutputWhenDisabled	  held
+	  InitialOutput		  "0"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "profile"
+	  Position		  [690, 170, 710, 190]
+	  Port			  "2"
+	  OutputWhenDisabled	  held
+	  InitialOutput		  "0"
+	}
+	Line {
+	  SrcBlock		  "Nonlinear\nProfile\nModel"
+	  SrcPort		  1
+	  DstBlock		  "Sum3"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Uniform Random\nNumber"
+	  SrcPort		  1
+	  Points		  [35, 0]
+	  DstBlock		  "Sum6"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Product"
+	  SrcPort		  1
+	  DstBlock		  "Saturation1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Saturation1"
+	  SrcPort		  1
+	  DstBlock		  "Unit Delay1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Unit Delay1"
+	  SrcPort		  1
+	  DstBlock		  "Nonlinear\nSpike\nModel"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "control"
+	  SrcPort		  1
+	  Points		  [10, 0]
+	  DstBlock		  "Product"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "spike_error"
+	  SrcPort		  1
+	  Points		  [25, 0]
+	  DstBlock		  "Nonlinear\nSpike\nModel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "profile_error"
+	  SrcPort		  1
+	  DstBlock		  "Nonlinear\nProfile\nModel"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Uniform Random\nNumber1"
+	  SrcPort		  1
+	  Points		  [45, 0; 0, -60]
+	  DstBlock		  "Sum3"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Nonlinear\nSpike\nModel"
+	  SrcPort		  1
+	  Points		  [5, 0]
+	  Branch {
+	    DstBlock		    "Sum6"
+	    DstPort		    2
+	  }
+	  Branch {
+	    Points		    [0, 195]
+	    DstBlock		    "overtemp1"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Sum3"
+	  SrcPort		  1
+	  Points		  [0, -15; 10, 0]
+	  Branch {
+	    DstBlock		    "profile"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [-10, 0]
+	    DstBlock		    "overtemp"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "Sum6"
+	  SrcPort		  1
+	  Points		  [0, -15; 10, 0]
+	  Branch {
+	    DstBlock		    "Nonlinear\nProfile\nModel"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -125]
+	    DstBlock		    "spike"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "abort"
+	  SrcPort		  1
+	  Points		  [-5, 0]
+	  DstBlock		  "Product"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Sum7"
+	  SrcPort		  1
+	  DstBlock		  "abort"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "overtemp1"
+	  SrcPort		  1
+	  Points		  [25, 0; 0, 40]
+	  DstBlock		  "Sum7"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "overtemp"
+	  SrcPort		  1
+	  DstBlock		  "Sum7"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "disturbance"
+	  SrcPort		  1
+	  Points		  [-125, 0]
+	  DstBlock		  "Sum6"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "disturbance"
+	  SrcPort		  2
+	  Points		  [0, 40; 100, 0]
+	  DstBlock		  "Sum3"
+	  DstPort		  3
+	}
+      }
+    }
+    Block {
+      BlockType		      Product
+      Name		      "Product9"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [475, 110, 500, 130]
+      ForegroundColor	      blue
+      Inputs		      "2"
+    }
+    Block {
+      BlockType		      RateLimiter
+      Name		      "Rate Limiter"
+      Position		      [100, 87, 130, 113]
+      BackgroundColor	      yellow
+      RisingSlewLimit	      "15"
+      FallingSlewLimit	      "-5"
+    }
+    Block {
+      BlockType		      Step
+      Name		      "Step Fcn"
+      Position		      [35, 90, 55, 110]
+      BackgroundColor	      yellow
+      Time		      "30"
+      Before		      "550"
+      After		      "800"
+    }
+    Block {
+      BlockType		      Sum
+      Name		      "Sum"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [270, 95, 290, 115]
+      Inputs		      "++"
+    }
+    Block {
+      BlockType		      Terminator
+      Name		      "Terminator"
+      Position		      [105, 200, 125, 220]
+    }
+    Block {
+      BlockType		      Terminator
+      Name		      "Terminator1"
+      Position		      [105, 285, 125, 305]
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace2"
+      Position		      [85, 17, 135, 33]
+      BackgroundColor	      yellow
+      VariableName	      "T"
+      Buffer		      "25000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace3"
+      Position		      [170, 47, 220, 63]
+      BackgroundColor	      yellow
+      VariableName	      "R"
+      Buffer		      "25000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "To Workspace5"
+      Position		      [270, 37, 320, 53]
+      Orientation	      left
+      BackgroundColor	      yellow
+      VariableName	      "U"
+      Buffer		      "25000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "excitation"
+      Ports		      [0, 1, 0, 0, 0]
+      Position		      [180, 185, 210, 235]
+      BackgroundColor	      orange
+      ShowPortLabels	      on
+      MaskInitialization      "load 'excit'"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      none
+      MaskIconUnits	      autoscale
+      System {
+	Name			"excitation"
+	Location		[157, 329, 443, 520]
+	Open			off
+	ToolBar			off
+	StatusBar		off
+	ScreenColor		white
+	PaperOrientation	landscape
+	PaperPositionMode	auto
+	PaperType		usletter
+	PaperUnits		inches
+	Block {
+	  BlockType		  FromWorkspace
+	  Name			  "From \nWorkspace"
+	  Position		  [25, 25, 85, 55]
+	  VariableName		  "[TX,RX]"
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain"
+	  Position		  [125, 25, 155, 55]
+	  Gain			  "1"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "Out1"
+	  Position		  [205, 33, 235, 47]
+	  Port			  "1"
+	  OutputWhenDisabled	  held
+	  InitialOutput		  "0"
+	}
+	Line {
+	  SrcBlock		  "Gain"
+	  SrcPort		  1
+	  DstBlock		  "Out1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "From \nWorkspace"
+	  SrcPort		  1
+	  DstBlock		  "Gain"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "generic pid\ncontroller"
+      Ports		      [2, 1, 0, 0, 0]
+      Position		      [320, 88, 370, 157]
+      ShowPortLabels	      on
+      System {
+	Name			"generic pid\ncontroller"
+	Location		[339, 128, 853, 477]
+	Open			off
+	ToolBar			off
+	StatusBar		off
+	ScreenColor		white
+	PaperOrientation	landscape
+	PaperPositionMode	auto
+	PaperType		usletter
+	PaperUnits		inches
+	Block {
+	  BlockType		  Inport
+	  Name			  "reference"
+	  Position		  [15, 90, 35, 110]
+	  Port			  "1"
+	  PortWidth		  "-1"
+	  SampleTime		  "-1"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "output"
+	  Position		  [20, 230, 40, 250]
+	  Port			  "2"
+	  PortWidth		  "-1"
+	  SampleTime		  "-1"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "AW-PID "
+	  Ports			  [2, 1, 0, 0, 0]
+	  Position		  [210, 59, 300, 121]
+	  ShowPortLabels	  off
+	  MaskType		  "Anti-windup PID "
+	  MaskDescription	  "Discrete PID with Anti-windup and with lowp"
+"ass filter"
+	  MaskPromptString	  "Gain kp - Integral time ki - Derivative tim"
+"e kd|Pseudo-derivative filter time constant|Error lowpass filter Time constan"
+"t|Sampling Time|Saturation Limits [umax umin]"
+	  MaskStyleString	  "edit,edit,edit,edit,edit"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskVariables		  "SAM=@2;TF=@3;DT=@4;"
+	  MaskInitialization	  "kp=@1(1);ki=@1(2);kd=@1(3);umax=@5(1);umin="
+"@5(2);"
+	  MaskDisplay		  "disp('AW-PID+filter')"
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  none
+	  MaskIconUnits		  autoscale
+	  MaskValueString	  "[.02, 1.6, 1.27]|.1|0.1|.5/60|[1 0]"
+	  System {
+	    Name		    "AW-PID "
+	    Location		    [4, 62, 604, 488]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Set point"
+	      Position		      [30, 40, 50, 60]
+	      Port		      "1"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "System Output"
+	      Position		      [30, 115, 50, 135]
+	      Port		      "2"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [375, 301, 415, 329]
+	      Value		      "0"
+	    }
+	    Block {
+	      BlockType		      DiscreteTransferFcn
+	      Name		      "Dis. Transfer Fcn1"
+	      Position		      [305, 411, 385, 449]
+	      Numerator		      "[DT/SAM]"
+	      Denominator	      "[1 -1+DT/SAM]"
+	      SampleTime	      "DT"
+	    }
+	    Block {
+	      BlockType		      DiscreteTransferFcn
+	      Name		      "Low-pass filter"
+	      Position		      [115, 34, 225, 86]
+	      Numerator		      "[DT/(TF+DT),  0]"
+	      Denominator	      "[1,  -TF/(TF+DT)]"
+	      SampleTime	      "DT"
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "P+I+D"
+	      Ports		      [5, 1, 0, 0, 0]
+	      Position		      [500, 265, 520, 425]
+	      Inputs		      "++++-"
+	    }
+	    Block {
+	      BlockType		      Gain
+	      Name		      "Proportional"
+	      Position		      [265, 329, 310, 361]
+	      Gain		      "kp"
+	    }
+	    Block {
+	      BlockType		      Gain
+	      Name		      "Proportional3"
+	      Position		      [130, 355, 240, 395]
+	      Gain		      "kp*kd/SAM"
+	    }
+	    Block {
+	      BlockType		      Saturate
+	      Name		      "Saturation"
+	      Position		      [570, 335, 595, 355]
+	      UpperLimit	      "umax"
+	      LowerLimit	      "umin"
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "error"
+	      Ports		      [2, 1, 0, 0, 0]
+	      Position		      [80, 42, 100, 78]
+	      Inputs		      "+-"
+	    }
+	    Block {
+	      BlockType		      Gain
+	      Name		      "gain"
+	      Position		      [265, 159, 350, 211]
+	      Gain		      "DT*kp/ki"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "integrator2"
+	      Ports		      [1, 1, 0, 0, 0]
+	      Position		      [385, 159, 440, 211]
+	      ShowPortLabels	      off
+	      MaskType		      "Anti windup intgrator"
+	      MaskDescription	      "Integral with anti-windup  "
+	      MaskPromptString	      "umax|umin|sampling time"
+	      MaskStyleString	      "edit,edit,edit"
+	      MaskTunableValueString  "on,on,on"
+	      MaskInitialization      "umax=@1 ; umin =@2 ;DT=@3;"
+	      MaskDisplay	      "disp('DT-I-AW')"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      none
+	      MaskIconUnits	      autoscale
+	      MaskValueString	      "umax|umin|DT"
+	      System {
+		Name			"integrator2"
+		Location		[4, 42, 646, 496]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		white
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Inport
+		  Name			  "in_1"
+		  Position		  [15, 140, 35, 160]
+		  Port			  "1"
+		  PortWidth		  "-1"
+		  SampleTime		  "-1"
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant"
+		  Position		  [45, 180, 115, 220]
+		  Value			  "umax"
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant3"
+		  Position		  [210, 193, 285, 227]
+		  Value			  "umin"
+		}
+		Block {
+		  BlockType		  Switch
+		  Name			  "Switch"
+		  Position		  [220, 109, 245, 161]
+		  Threshold		  "0"
+		}
+		Block {
+		  BlockType		  Switch
+		  Name			  "Switch2"
+		  Position		  [390, 114, 415, 166]
+		  Threshold		  "0"
+		}
+		Block {
+		  BlockType		  DiscreteTransferFcn
+		  Name			  "delay"
+		  Position		  [180, 39, 225, 81]
+		  Orientation		  left
+		  Numerator		  "[1]"
+		  Denominator		  "[1 0]"
+		  SampleTime		  "DT"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "error1"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [65, 122, 85, 158]
+		  Inputs		  "++"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "error2"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [155, 123, 175, 147]
+		  Inputs		  "+-"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "error3"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [315, 128, 335, 152]
+		  Inputs		  "+-"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [480, 130, 500, 150]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "delay"
+		  SrcPort		  1
+		  Points		  [-135, 0; 0, 70]
+		  DstBlock		  "error1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "error2"
+		  SrcPort		  1
+		  DstBlock		  "Switch"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "error3"
+		  SrcPort		  1
+		  DstBlock		  "Switch2"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Constant3"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    Points		    [10, 0; 0, -25; -25, 0; 0, -40]
+		    DstBlock		    "error3"
+		    DstPort		    2
+		  }
+		  Branch {
+		    Points		    [60, 0; 0, -55]
+		    DstBlock		    "Switch2"
+		    DstPort		    3
+		  }
+		}
+		Line {
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    Points		    [10, 0; 0, -70]
+		    DstBlock		    "error2"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [60, 0; 0, -50]
+		    DstBlock		    "Switch"
+		    DstPort		    3
+		  }
+		}
+		Line {
+		  SrcBlock		  "error1"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    DstBlock		    "error2"
+		    DstPort		    2
+		  }
+		  Branch {
+		    Points		    [10, 0; 0, -20]
+		    DstBlock		    "Switch"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Switch"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    DstBlock		    "error3"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [30, 0; 0, -35; 75, 0; 0, 25]
+		    DstBlock		    "Switch2"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Switch2"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    Points		    [10, 0; 0, -80]
+		    DstBlock		    "delay"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "out_1"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "in_1"
+		  SrcPort		  1
+		  DstBlock		  "error1"
+		  DstPort		  2
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Input to system"
+	      Position		      [670, 332, 685, 358]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "integrator2"
+	      SrcPort		      1
+	      Points		      [15, 0; 0, 100]
+	      DstBlock		      "P+I+D"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "error"
+	      SrcPort		      1
+	      DstBlock		      "Low-pass filter"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Set point"
+	      SrcPort		      1
+	      DstBlock		      "error"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "System Output"
+	      SrcPort		      1
+	      Points		      [5, 0; 0, -55]
+	      DstBlock		      "error"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Low-pass filter"
+	      SrcPort		      1
+	      Points		      [0, 0]
+	      Branch {
+		Points			[10, 0; 0, 285]
+		DstBlock		"Proportional"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[10, 0; 0, 115; -135, 0; 0, 200]
+		DstBlock		"Proportional3"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[20, 0]
+		DstBlock		"gain"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Dis. Transfer Fcn1"
+	      SrcPort		      1
+	      Points		      [45, 0; 0, -25]
+	      DstBlock		      "P+I+D"
+	      DstPort		      5
+	    }
+	    Line {
+	      SrcBlock		      "Proportional3"
+	      SrcPort		      1
+	      Points		      [0, 0]
+	      Branch {
+		Points			[20, 0; 0, 55]
+		DstBlock		"Dis. Transfer Fcn1"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"P+I+D"
+		DstPort			4
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Proportional"
+	      SrcPort		      1
+	      DstBlock		      "P+I+D"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "gain"
+	      SrcPort		      1
+	      DstBlock		      "integrator2"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "P+I+D"
+	      SrcPort		      1
+	      DstBlock		      "Saturation"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Saturation"
+	      SrcPort		      1
+	      DstBlock		      "Input to system"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "P+I+D"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "AW-PID 1"
+	  Ports			  [2, 1, 0, 0, 0]
+	  Position		  [210, 139, 300, 201]
+	  ShowPortLabels	  off
+	  MaskType		  "Anti-windup PID "
+	  MaskDescription	  "Discrete PID with Anti-windup and with lowp"
+"ass filter"
+	  MaskPromptString	  "Gain kp - Integral time ki - Derivative tim"
+"e kd|Pseudo-derivative filter time constant|Error lowpass filter Time constan"
+"t|Sampling Time|Saturation Limits [umax umin]"
+	  MaskStyleString	  "edit,edit,edit,edit,edit"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskInitialization	  "kp=@1(1);ki=@1(2);kd=@1(3);SAM=@2;TF=@3;DT="
+"@4;umax=@5(1);umin=@5(2);"
+	  MaskDisplay		  "disp('AW-PID+filter')"
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  none
+	  MaskIconUnits		  autoscale
+	  MaskValueString	  "[.047, 1.96, 1.2]|.1|0.1|.5/60|[1 0]"
+	  System {
+	    Name		    "AW-PID 1"
+	    Location		    [4, 62, 604, 488]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Set point"
+	      Position		      [30, 40, 50, 60]
+	      Port		      "1"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "System Output"
+	      Position		      [30, 115, 50, 135]
+	      Port		      "2"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [375, 301, 415, 329]
+	      Value		      "0"
+	    }
+	    Block {
+	      BlockType		      DiscreteTransferFcn
+	      Name		      "Dis. Transfer Fcn1"
+	      Position		      [305, 411, 385, 449]
+	      Numerator		      "[DT/SAM]"
+	      Denominator	      "[1 -1+DT/SAM]"
+	      SampleTime	      "DT"
+	    }
+	    Block {
+	      BlockType		      DiscreteTransferFcn
+	      Name		      "Low-pass filter"
+	      Position		      [115, 34, 225, 86]
+	      Numerator		      "[DT/(TF+DT),  0]"
+	      Denominator	      "[1,  -TF/(TF+DT)]"
+	      SampleTime	      "DT"
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "P+I+D"
+	      Ports		      [5, 1, 0, 0, 0]
+	      Position		      [500, 265, 520, 425]
+	      Inputs		      "++++-"
+	    }
+	    Block {
+	      BlockType		      Gain
+	      Name		      "Proportional"
+	      Position		      [265, 329, 310, 361]
+	      Gain		      "kp"
+	    }
+	    Block {
+	      BlockType		      Gain
+	      Name		      "Proportional3"
+	      Position		      [130, 355, 240, 395]
+	      Gain		      "kp*kd/SAM"
+	    }
+	    Block {
+	      BlockType		      Saturate
+	      Name		      "Saturation"
+	      Position		      [570, 335, 595, 355]
+	      UpperLimit	      "umax"
+	      LowerLimit	      "umin"
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "error"
+	      Ports		      [2, 1, 0, 0, 0]
+	      Position		      [80, 42, 100, 78]
+	      Inputs		      "+-"
+	    }
+	    Block {
+	      BlockType		      Gain
+	      Name		      "gain"
+	      Position		      [265, 159, 350, 211]
+	      Gain		      "DT*kp/ki"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "integrator2"
+	      Ports		      [1, 1, 0, 0, 0]
+	      Position		      [385, 159, 440, 211]
+	      ShowPortLabels	      off
+	      MaskType		      "Anti windup intgrator"
+	      MaskDescription	      "Integral with anti-windup  "
+	      MaskPromptString	      "umax|umin|sampling time"
+	      MaskStyleString	      "edit,edit,edit"
+	      MaskTunableValueString  "on,on,on"
+	      MaskInitialization      "umax=@1 ; umin =@2 ;DT=@3;"
+	      MaskDisplay	      "disp('DT-I-AW')"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      none
+	      MaskIconUnits	      autoscale
+	      MaskValueString	      "umax|umin|DT"
+	      System {
+		Name			"integrator2"
+		Location		[4, 42, 646, 496]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		white
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Inport
+		  Name			  "in_1"
+		  Position		  [15, 140, 35, 160]
+		  Port			  "1"
+		  PortWidth		  "-1"
+		  SampleTime		  "-1"
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant"
+		  Position		  [45, 180, 115, 220]
+		  Value			  "umax"
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant3"
+		  Position		  [210, 193, 285, 227]
+		  Value			  "umin"
+		}
+		Block {
+		  BlockType		  Switch
+		  Name			  "Switch"
+		  Position		  [220, 109, 245, 161]
+		  Threshold		  "0"
+		}
+		Block {
+		  BlockType		  Switch
+		  Name			  "Switch2"
+		  Position		  [390, 114, 415, 166]
+		  Threshold		  "0"
+		}
+		Block {
+		  BlockType		  DiscreteTransferFcn
+		  Name			  "delay"
+		  Position		  [180, 39, 225, 81]
+		  Orientation		  left
+		  Numerator		  "[1]"
+		  Denominator		  "[1 0]"
+		  SampleTime		  "DT"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "error1"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [65, 122, 85, 158]
+		  Inputs		  "++"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "error2"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [155, 123, 175, 147]
+		  Inputs		  "+-"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "error3"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [315, 128, 335, 152]
+		  Inputs		  "+-"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [480, 130, 500, 150]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "delay"
+		  SrcPort		  1
+		  Points		  [-135, 0; 0, 70]
+		  DstBlock		  "error1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "error2"
+		  SrcPort		  1
+		  DstBlock		  "Switch"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "error3"
+		  SrcPort		  1
+		  DstBlock		  "Switch2"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Constant3"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    Points		    [10, 0; 0, -25; -25, 0; 0, -40]
+		    DstBlock		    "error3"
+		    DstPort		    2
+		  }
+		  Branch {
+		    Points		    [60, 0; 0, -55]
+		    DstBlock		    "Switch2"
+		    DstPort		    3
+		  }
+		}
+		Line {
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    Points		    [10, 0; 0, -70]
+		    DstBlock		    "error2"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [60, 0; 0, -50]
+		    DstBlock		    "Switch"
+		    DstPort		    3
+		  }
+		}
+		Line {
+		  SrcBlock		  "error1"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    DstBlock		    "error2"
+		    DstPort		    2
+		  }
+		  Branch {
+		    Points		    [10, 0; 0, -20]
+		    DstBlock		    "Switch"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Switch"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    DstBlock		    "error3"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [30, 0; 0, -35; 75, 0; 0, 25]
+		    DstBlock		    "Switch2"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Switch2"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    Points		    [10, 0; 0, -80]
+		    DstBlock		    "delay"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "out_1"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "in_1"
+		  SrcPort		  1
+		  DstBlock		  "error1"
+		  DstPort		  2
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Input to system"
+	      Position		      [670, 332, 685, 358]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "integrator2"
+	      SrcPort		      1
+	      Points		      [15, 0; 0, 100]
+	      DstBlock		      "P+I+D"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "error"
+	      SrcPort		      1
+	      DstBlock		      "Low-pass filter"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Set point"
+	      SrcPort		      1
+	      DstBlock		      "error"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "System Output"
+	      SrcPort		      1
+	      Points		      [5, 0; 0, -55]
+	      DstBlock		      "error"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Low-pass filter"
+	      SrcPort		      1
+	      Points		      [0, 0]
+	      Branch {
+		Points			[10, 0; 0, 285]
+		DstBlock		"Proportional"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[10, 0; 0, 115; -135, 0; 0, 200]
+		DstBlock		"Proportional3"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[20, 0]
+		DstBlock		"gain"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Dis. Transfer Fcn1"
+	      SrcPort		      1
+	      Points		      [45, 0; 0, -25]
+	      DstBlock		      "P+I+D"
+	      DstPort		      5
+	    }
+	    Line {
+	      SrcBlock		      "Proportional3"
+	      SrcPort		      1
+	      Points		      [0, 0]
+	      Branch {
+		Points			[20, 0; 0, 55]
+		DstBlock		"Dis. Transfer Fcn1"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"P+I+D"
+		DstPort			4
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Proportional"
+	      SrcPort		      1
+	      DstBlock		      "P+I+D"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "gain"
+	      SrcPort		      1
+	      DstBlock		      "integrator2"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "P+I+D"
+	      SrcPort		      1
+	      DstBlock		      "Saturation"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Saturation"
+	      SrcPort		      1
+	      DstBlock		      "Input to system"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "P+I+D"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "AW-PID 2"
+	  Ports			  [2, 1, 0, 0, 0]
+	  Position		  [210, 219, 300, 281]
+	  ShowPortLabels	  off
+	  MaskType		  "Anti-windup PID "
+	  MaskDescription	  "Discrete PID with Anti-windup and with lowp"
+"ass filter"
+	  MaskPromptString	  "Gain kp - Integral time ki - Derivative tim"
+"e kd|Pseudo-derivative filter time constant|Error lowpass filter Time constan"
+"t|Sampling Time|Saturation Limits [umax umin]"
+	  MaskStyleString	  "edit,edit,edit,edit,edit"
+	  MaskTunableValueString  "on,on,on,on,on"
+	  MaskInitialization	  "kp=@1(1);ki=@1(2);kd=@1(3);SAM=@2;TF=@3;DT="
+"@4;umax=@5(1);umin=@5(2);"
+	  MaskDisplay		  "disp('AW-PID+filter')"
+	  MaskIconFrame		  on
+	  MaskIconOpaque	  on
+	  MaskIconRotate	  none
+	  MaskIconUnits		  autoscale
+	  MaskValueString	  "[.027, 1.66, 1.9]|.1|0.1|.5/60|[1 0]"
+	  System {
+	    Name		    "AW-PID 2"
+	    Location		    [4, 62, 604, 488]
+	    Open		    off
+	    ToolBar		    off
+	    StatusBar		    off
+	    ScreenColor		    white
+	    PaperOrientation	    landscape
+	    PaperPositionMode	    auto
+	    PaperType		    usletter
+	    PaperUnits		    inches
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Set point"
+	      Position		      [30, 40, 50, 60]
+	      Port		      "1"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "System Output"
+	      Position		      [30, 115, 50, 135]
+	      Port		      "2"
+	      PortWidth		      "-1"
+	      SampleTime	      "-1"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "Constant"
+	      Position		      [375, 301, 415, 329]
+	      Value		      "0"
+	    }
+	    Block {
+	      BlockType		      DiscreteTransferFcn
+	      Name		      "Dis. Transfer Fcn1"
+	      Position		      [305, 411, 385, 449]
+	      Numerator		      "[DT/SAM]"
+	      Denominator	      "[1 -1+DT/SAM]"
+	      SampleTime	      "DT"
+	    }
+	    Block {
+	      BlockType		      DiscreteTransferFcn
+	      Name		      "Low-pass filter"
+	      Position		      [115, 34, 225, 86]
+	      Numerator		      "[DT/(TF+DT),  0]"
+	      Denominator	      "[1,  -TF/(TF+DT)]"
+	      SampleTime	      "DT"
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "P+I+D"
+	      Ports		      [5, 1, 0, 0, 0]
+	      Position		      [500, 265, 520, 425]
+	      Inputs		      "++++-"
+	    }
+	    Block {
+	      BlockType		      Gain
+	      Name		      "Proportional"
+	      Position		      [265, 329, 310, 361]
+	      Gain		      "kp"
+	    }
+	    Block {
+	      BlockType		      Gain
+	      Name		      "Proportional3"
+	      Position		      [130, 355, 240, 395]
+	      Gain		      "kp*kd/SAM"
+	    }
+	    Block {
+	      BlockType		      Saturate
+	      Name		      "Saturation"
+	      Position		      [570, 335, 595, 355]
+	      UpperLimit	      "umax"
+	      LowerLimit	      "umin"
+	    }
+	    Block {
+	      BlockType		      Sum
+	      Name		      "error"
+	      Ports		      [2, 1, 0, 0, 0]
+	      Position		      [80, 42, 100, 78]
+	      Inputs		      "+-"
+	    }
+	    Block {
+	      BlockType		      Gain
+	      Name		      "gain"
+	      Position		      [265, 159, 350, 211]
+	      Gain		      "DT*kp/ki"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "integrator2"
+	      Ports		      [1, 1, 0, 0, 0]
+	      Position		      [385, 159, 440, 211]
+	      ShowPortLabels	      off
+	      MaskType		      "Anti windup intgrator"
+	      MaskDescription	      "Integral with anti-windup  "
+	      MaskPromptString	      "umax|umin|sampling time"
+	      MaskStyleString	      "edit,edit,edit"
+	      MaskTunableValueString  "on,on,on"
+	      MaskInitialization      "umax=@1 ; umin =@2 ;DT=@3;"
+	      MaskDisplay	      "disp('DT-I-AW')"
+	      MaskIconFrame	      on
+	      MaskIconOpaque	      on
+	      MaskIconRotate	      none
+	      MaskIconUnits	      autoscale
+	      MaskValueString	      "umax|umin|DT"
+	      System {
+		Name			"integrator2"
+		Location		[4, 42, 646, 496]
+		Open			off
+		ToolBar			off
+		StatusBar		off
+		ScreenColor		white
+		PaperOrientation	landscape
+		PaperPositionMode	auto
+		PaperType		usletter
+		PaperUnits		inches
+		Block {
+		  BlockType		  Inport
+		  Name			  "in_1"
+		  Position		  [15, 140, 35, 160]
+		  Port			  "1"
+		  PortWidth		  "-1"
+		  SampleTime		  "-1"
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant"
+		  Position		  [45, 180, 115, 220]
+		  Value			  "umax"
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant3"
+		  Position		  [210, 193, 285, 227]
+		  Value			  "umin"
+		}
+		Block {
+		  BlockType		  Switch
+		  Name			  "Switch"
+		  Position		  [220, 109, 245, 161]
+		  Threshold		  "0"
+		}
+		Block {
+		  BlockType		  Switch
+		  Name			  "Switch2"
+		  Position		  [390, 114, 415, 166]
+		  Threshold		  "0"
+		}
+		Block {
+		  BlockType		  DiscreteTransferFcn
+		  Name			  "delay"
+		  Position		  [180, 39, 225, 81]
+		  Orientation		  left
+		  Numerator		  "[1]"
+		  Denominator		  "[1 0]"
+		  SampleTime		  "DT"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "error1"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [65, 122, 85, 158]
+		  Inputs		  "++"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "error2"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [155, 123, 175, 147]
+		  Inputs		  "+-"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "error3"
+		  Ports			  [2, 1, 0, 0, 0]
+		  Position		  [315, 128, 335, 152]
+		  Inputs		  "+-"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "out_1"
+		  Position		  [480, 130, 500, 150]
+		  Port			  "1"
+		  OutputWhenDisabled	  held
+		  InitialOutput		  "0"
+		}
+		Line {
+		  SrcBlock		  "delay"
+		  SrcPort		  1
+		  Points		  [-135, 0; 0, 70]
+		  DstBlock		  "error1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "error2"
+		  SrcPort		  1
+		  DstBlock		  "Switch"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "error3"
+		  SrcPort		  1
+		  DstBlock		  "Switch2"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Constant3"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    Points		    [10, 0; 0, -25; -25, 0; 0, -40]
+		    DstBlock		    "error3"
+		    DstPort		    2
+		  }
+		  Branch {
+		    Points		    [60, 0; 0, -55]
+		    DstBlock		    "Switch2"
+		    DstPort		    3
+		  }
+		}
+		Line {
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    Points		    [10, 0; 0, -70]
+		    DstBlock		    "error2"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [60, 0; 0, -50]
+		    DstBlock		    "Switch"
+		    DstPort		    3
+		  }
+		}
+		Line {
+		  SrcBlock		  "error1"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    DstBlock		    "error2"
+		    DstPort		    2
+		  }
+		  Branch {
+		    Points		    [10, 0; 0, -20]
+		    DstBlock		    "Switch"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Switch"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    DstBlock		    "error3"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [30, 0; 0, -35; 75, 0; 0, 25]
+		    DstBlock		    "Switch2"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Switch2"
+		  SrcPort		  1
+		  Points		  [0, 0]
+		  Branch {
+		    Points		    [10, 0; 0, -80]
+		    DstBlock		    "delay"
+		    DstPort		    1
+		  }
+		  Branch {
+		    DstBlock		    "out_1"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "in_1"
+		  SrcPort		  1
+		  DstBlock		  "error1"
+		  DstPort		  2
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "Input to system"
+	      Position		      [670, 332, 685, 358]
+	      Port		      "1"
+	      OutputWhenDisabled      held
+	      InitialOutput	      "0"
+	    }
+	    Line {
+	      SrcBlock		      "integrator2"
+	      SrcPort		      1
+	      Points		      [15, 0; 0, 100]
+	      DstBlock		      "P+I+D"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "error"
+	      SrcPort		      1
+	      DstBlock		      "Low-pass filter"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Set point"
+	      SrcPort		      1
+	      DstBlock		      "error"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "System Output"
+	      SrcPort		      1
+	      Points		      [5, 0; 0, -55]
+	      DstBlock		      "error"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Low-pass filter"
+	      SrcPort		      1
+	      Points		      [0, 0]
+	      Branch {
+		Points			[10, 0; 0, 285]
+		DstBlock		"Proportional"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[10, 0; 0, 115; -135, 0; 0, 200]
+		DstBlock		"Proportional3"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[20, 0]
+		DstBlock		"gain"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Dis. Transfer Fcn1"
+	      SrcPort		      1
+	      Points		      [45, 0; 0, -25]
+	      DstBlock		      "P+I+D"
+	      DstPort		      5
+	    }
+	    Line {
+	      SrcBlock		      "Proportional3"
+	      SrcPort		      1
+	      Points		      [0, 0]
+	      Branch {
+		Points			[20, 0; 0, 55]
+		DstBlock		"Dis. Transfer Fcn1"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"P+I+D"
+		DstPort			4
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Proportional"
+	      SrcPort		      1
+	      DstBlock		      "P+I+D"
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "gain"
+	      SrcPort		      1
+	      DstBlock		      "integrator2"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "P+I+D"
+	      SrcPort		      1
+	      DstBlock		      "Saturation"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Saturation"
+	      SrcPort		      1
+	      DstBlock		      "Input to system"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Constant"
+	      SrcPort		      1
+	      DstBlock		      "P+I+D"
+	      DstPort		      2
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux"
+	  Ports			  [1, 3, 0, 0, 0]
+	  Position		  [95, 63, 125, 137]
+	  Outputs		  "3"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  "Demux1"
+	  Ports			  [1, 3, 0, 0, 0]
+	  Position		  [75, 203, 105, 277]
+	  Outputs		  "3"
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux2"
+	  Ports			  [3, 1, 0, 0, 0]
+	  Position		  [355, 154, 385, 186]
+	  Inputs		  "3"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_1"
+	  Position		  [465, 160, 485, 180]
+	  Port			  "1"
+	  OutputWhenDisabled	  held
+	  InitialOutput		  "0"
+	}
+	Line {
+	  SrcBlock		  "AW-PID 2"
+	  SrcPort		  1
+	  Points		  [15, 0; 0, -70]
+	  DstBlock		  "Mux2"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "AW-PID "
+	  SrcPort		  1
+	  Points		  [15, 0; 0, 70]
+	  DstBlock		  "Mux2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "AW-PID 1"
+	  SrcPort		  1
+	  DstBlock		  "Mux2"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Mux2"
+	  SrcPort		  1
+	  DstBlock		  "out_1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "reference"
+	  SrcPort		  1
+	  DstBlock		  "Demux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  1
+	  DstBlock		  "AW-PID "
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  2
+	  Points		  [30, 0; 0, 55]
+	  DstBlock		  "AW-PID 1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux"
+	  SrcPort		  3
+	  Points		  [25, 0; 0, 110]
+	  DstBlock		  "AW-PID 2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  3
+	  DstBlock		  "AW-PID 2"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "output"
+	  SrcPort		  1
+	  DstBlock		  "Demux1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  2
+	  Points		  [40, 0; 0, -55]
+	  DstBlock		  "AW-PID 1"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Demux1"
+	  SrcPort		  1
+	  Points		  [35, 0; 0, -110]
+	  DstBlock		  "AW-PID "
+	  DstPort		  2
+	}
+	Annotation {
+	  Position		  [248, 446]
+	  Text			  "  2.9873e-002  2.3770e+000  1.1004e+000\n  "
+"5.8485e-002  3.6863e+000  1.3216e+000\n  3.1318e-002  1.7040e+000  2.9610e+00"
+"0\n"
+	}
+      }
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "input"
+      Ports		      [1, 0, 0, 0, 0]
+      Position		      [530, 7, 550, 33]
+      BackgroundColor	      blue
+      Floating		      off
+      Location		      [781, 240, 1015, 408]
+      Open		      on
+      Grid		      on
+      TickLabels	      on
+      ZoomMode		      on
+      TimeRange		      "200"
+      YMin		      "0"
+      YMax		      "1"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitMaxRows	      on
+      MaxRows		      "25000"
+      Decimation	      "1"
+      SampleInput	      on
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      Scope
+      Name		      "out41"
+      Ports		      [1, 0, 0, 0, 0]
+      Position		      [575, 12, 595, 38]
+      Orientation	      left
+      BackgroundColor	      green
+      Floating		      off
+      Location		      [778, 30, 1018, 215]
+      Open		      on
+      Grid		      on
+      TickLabels	      on
+      ZoomMode		      on
+      TimeRange		      "200"
+      YMin		      "500"
+      YMax		      "1000"
+      SaveToWorkspace	      off
+      SaveName		      "ScopeData"
+      LimitMaxRows	      on
+      MaxRows		      "25000"
+      Decimation	      "1"
+      SampleInput	      on
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "profile_or\noptimized_profile2"
+      Position		      [675, 127, 725, 143]
+      BackgroundColor	      yellow
+      VariableName	      "YP"
+      Buffer		      "25000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      ToWorkspace
+      Name		      "spike"
+      Position		      [675, 92, 725, 108]
+      BackgroundColor	      yellow
+      VariableName	      "YS"
+      Buffer		      "25000"
+      Decimation	      "1"
+      SampleTime	      "0"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "test recipe"
+      Ports		      [0, 1, 0, 0, 0]
+      Position		      [25, 192, 60, 228]
+      BackgroundColor	      yellow
+      ShowPortLabels	      off
+      MaskType		      "Repeating table"
+      MaskDescription	      "Repeating table.\nEnter values of time and outp"
+"ut for first cycle."
+      MaskHelp		      "Repeats cycle given in table. Time values shoul"
+"d be monotonically increasing."
+      MaskPromptString	      "Time values:|Output values:"
+      MaskStyleString	      "edit,edit"
+      MaskTunableValueString  "on,on"
+      MaskInitialization      "period = max(@1); t = @1; y = @2;"
+      MaskDisplay	      "plot([t,t+period,t+2*period],[y,y,y])"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      none
+      MaskIconUnits	      autoscale
+      MaskValueString	      "[0     20    35  95  96  200]|[550 550 800 800 "
+"600 600]"
+      System {
+	Name			"test recipe"
+	Location		[5, 40, 315, 196]
+	Open			off
+	ToolBar			off
+	StatusBar		off
+	ScreenColor		white
+	PaperOrientation	landscape
+	PaperPositionMode	auto
+	PaperType		usletter
+	PaperUnits		inches
+	Block {
+	  BlockType		  Clock
+	  Name			  "Clock"
+	  Position		  [45, 60, 65, 80]
+	  Location		  [30, 40, 140, 75]
+	}
+	Block {
+	  BlockType		  Fcn
+	  Name			  "Fcn1"
+	  Position		  [110, 60, 150, 80]
+	  Expr			  "rem(u[1],period)"
+	}
+	Block {
+	  BlockType		  Lookup
+	  Name			  "Look-Up Table"
+	  Position		  [210, 58, 250, 82]
+	  InputValues		  "t"
+	  OutputValues		  "y"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_1"
+	  Position		  [285, 60, 305, 80]
+	  Port			  "1"
+	  OutputWhenDisabled	  held
+	  InitialOutput		  "0"
+	}
+	Line {
+	  SrcBlock		  "Look-Up Table"
+	  SrcPort		  1
+	  DstBlock		  "out_1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Clock"
+	  SrcPort		  1
+	  DstBlock		  "Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Fcn1"
+	  SrcPort		  1
+	  DstBlock		  "Look-Up Table"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "test recipe1"
+      Ports		      [0, 1, 0, 0, 0]
+      Position		      [25, 277, 60, 313]
+      BackgroundColor	      yellow
+      ShowPortLabels	      off
+      MaskType		      "Repeating table"
+      MaskDescription	      "Repeating table.\nEnter values of time and outp"
+"ut for first cycle."
+      MaskHelp		      "Repeats cycle given in table. Time values shoul"
+"d be monotonically increasing."
+      MaskPromptString	      "Time values:|Output values:"
+      MaskStyleString	      "edit,edit"
+      MaskTunableValueString  "on,on"
+      MaskInitialization      "period = max(@1); t = @1; y = @2;"
+      MaskDisplay	      "plot([t,t+period,t+2*period],[y,y,y])"
+      MaskIconFrame	      on
+      MaskIconOpaque	      on
+      MaskIconRotate	      none
+      MaskIconUnits	      autoscale
+      MaskValueString	      "[0     20    21  95  96  200]|[550 550 800 800 "
+"600 600]"
+      System {
+	Name			"test recipe1"
+	Location		[5, 40, 315, 196]
+	Open			off
+	ToolBar			off
+	StatusBar		off
+	ScreenColor		white
+	PaperOrientation	landscape
+	PaperPositionMode	auto
+	PaperType		usletter
+	PaperUnits		inches
+	Block {
+	  BlockType		  Clock
+	  Name			  "Clock"
+	  Position		  [45, 60, 65, 80]
+	  Location		  [30, 40, 140, 75]
+	}
+	Block {
+	  BlockType		  Fcn
+	  Name			  "Fcn1"
+	  Position		  [110, 60, 150, 80]
+	  Expr			  "rem(u[1],period)"
+	}
+	Block {
+	  BlockType		  Lookup
+	  Name			  "Look-Up Table"
+	  Position		  [210, 58, 250, 82]
+	  InputValues		  "t"
+	  OutputValues		  "y"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "out_1"
+	  Position		  [285, 60, 305, 80]
+	  Port			  "1"
+	  OutputWhenDisabled	  held
+	  InitialOutput		  "0"
+	}
+	Line {
+	  SrcBlock		  "Look-Up Table"
+	  SrcPort		  1
+	  DstBlock		  "out_1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Clock"
+	  SrcPort		  1
+	  DstBlock		  "Fcn1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Fcn1"
+	  SrcPort		  1
+	  DstBlock		  "Look-Up Table"
+	  DstPort		  1
+	}
+      }
+    }
+    Line {
+      SrcBlock		      "Clock"
+      SrcPort		      1
+      DstBlock		      "To Workspace2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Control Switch"
+      SrcPort		      1
+      Points		      [10, 0]
+      DstBlock		      "Product9"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Product9"
+      SrcPort		      1
+      DstBlock		      "PLANT"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Rate Limiter"
+      SrcPort		      1
+      Points		      [0, 0]
+      Branch {
+	Points			[10, 0; 0, -45]
+	DstBlock		"To Workspace3"
+	DstPort			1
+      }
+      Branch {
+	Points			[20, 0; 0, -10]
+	DstBlock		"Mux2"
+	DstPort			1
+      }
+      Branch {
+	DstBlock		"Mux2"
+	DstPort			2
+      }
+      Branch {
+	Points			[20, 0; 0, 10]
+	DstBlock		"Mux2"
+	DstPort			3
+      }
+    }
+    Line {
+      SrcBlock		      "generic pid\ncontroller"
+      SrcPort		      1
+      Points		      [0, 0]
+      Branch {
+	DstBlock		"Product9"
+	DstPort			2
+      }
+      Branch {
+	Points			[10, 0; 0, -80]
+	DstBlock		"To Workspace5"
+	DstPort			1
+      }
+      Branch {
+	Points			[10, 0; 0, -105]
+	DstBlock		"input"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Mux2"
+      SrcPort		      1
+      DstBlock		      "Sum"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Sum"
+      SrcPort		      1
+      DstBlock		      "generic pid\ncontroller"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "PLANT"
+      SrcPort		      2
+      Points		      [15, 0]
+      Branch {
+	Points			[0, 90; -335, 0; 0, -85]
+	DstBlock		"generic pid\ncontroller"
+	DstPort			2
+      }
+      Branch {
+	Points			[0, 0]
+	Branch {
+	  DstBlock		  "profile_or\noptimized_profile2"
+	  DstPort		  1
+	}
+	Branch {
+	  Points		  [0, -110]
+	  DstBlock		  "out41"
+	  DstPort		  1
+	}
+      }
+    }
+    Line {
+      SrcBlock		      "PLANT"
+      SrcPort		      1
+      DstBlock		      "spike"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "excitation"
+      SrcPort		      1
+      Points		      [40, 0]
+      DstBlock		      "Sum"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "test recipe"
+      SrcPort		      1
+      DstBlock		      "Terminator"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Step Fcn"
+      SrcPort		      1
+      DstBlock		      "Rate Limiter"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "test recipe1"
+      SrcPort		      1
+      DstBlock		      "Terminator1"
+      DstPort		      1
+    }
+  }
+}
